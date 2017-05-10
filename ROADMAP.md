@@ -2,6 +2,8 @@
 
 This file will list all development tasks, split in bite-sized chunnks, with their respective deadlines.
 
+Also view the [roadmap for Hoover improvements](https://github.com/hoover/search/wiki/Roadmap).
+
 ## Milestone: finish by 31 Jul 2017
 
 - [ ] Integrate additional technologies into the bundle
