@@ -4,6 +4,13 @@ This file will list all development tasks, split in bite-sized chunnks, with the
 
 Also view the [roadmap for Hoover improvements](https://github.com/hoover/search/wiki/Roadmap).
 
+## Immediate interest
+
+- [ ] Create liquid-core superuser from given params in the initialize.d script
+- [ ] Use that superuser to create OAuth2 applications for Hoover and Dokuwiki
+- [ ] Use the OAuth key ids/key secrets created to by that superuser to automatically configure Hoover and Dokuwiki
+- [ ] Initially, configure Hoover with OAuth2 login enabled: [load this app](https://github.com/hoover/search/tree/master/hoover/contrib/oauth2)
+
 ## Milestone: finish by 31 Jul 2017
 
 - [ ] Integrate additional technologies into the bundle
