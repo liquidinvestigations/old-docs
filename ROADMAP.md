@@ -6,6 +6,9 @@ Also view the [roadmap for Hoover improvements](https://github.com/hoover/search
 
 ## Immediate interest
 
+- [ ] Make [hoover/setup](https://github.com/hoover/setup) take OAuth2 related arguments (client ID, client secret, links)
+- [ ] Make [hoover/setup](https://github.com/hoover/setup) take a "CONFIG_DIR" argument that it will use to create the configs, then symlink the local.py files to that dir
+- [ ] Make [hoover/setup](https://github.com/hoover/setup) management command that promotes a hoover user to superuser (maybe use ./hoover search shell)
 - [ ] Create liquid-core superuser from given params in the initialize.d script
 - [ ] Use that superuser to create OAuth2 applications for Hoover and Dokuwiki
 - [ ] Use the OAuth key ids/key secrets created to by that superuser to automatically configure Hoover and Dokuwiki
