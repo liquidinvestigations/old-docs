@@ -186,4 +186,3 @@ The DNS server on all nodes must have the following records:
     vagrant-box-one.liquid    A   10.0.0.20
     vagrant-box-two.liquid    A   10.0.0.27
     vagrant-box-three.liquid  A   10.0.0.23
-
