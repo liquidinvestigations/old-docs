@@ -1,9 +1,9 @@
 # Discovery
 
-The Discovery service finds out which nodes are online and accessible on the
-network in a real-time, distributed fashion.
+The Liquid Discovery service provides a way for users to find other nodes on a network, streamlining collaboration. This is particularly applicable in war room scenarios, where multiple journalists may bring their indexed, searchable, annotated data to a team environment.
 
-The implementation for the service is hosted
-[here](github.com/liquidinvestigations/discover).
+The service identifies other nodes on a network and presents information about them to the user. It operates in a real time and distributed manner, with no central registry.
 
-See more about the technical implementation [here](TestingDiscovery.md).
+For technical details see [here](TestingDiscovery.md).
+
+The service implementation is hosted [here](github.com/liquidinvestigations/discover).
