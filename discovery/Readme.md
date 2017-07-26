@@ -14,4 +14,4 @@ For technical details about the implementation see
 can find how the system is being tested.
 
 The service implementation is hosted
-[here](github.com/liquidinvestigations/discover).
+[here](https://github.com/liquidinvestigations/discover).
