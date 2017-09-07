@@ -1,0 +1,242 @@
+FORMAT: 1A
+HOST: http://liquidinvestigations.apiblueprint.org/
+
+# Liquid Investigations
+
+API allowing for Liquid Investigations system management
+
+
+# Group Network Management Endpoints
+
+## Status [/network/status]
+
+### Get Network Status [GET]
+Returns a dictionary describing the current status of the network (connected? via which interfaces?
+how many clients?)
+
++ Response 200 (application/json)
+
+## Configuration [/network/config]
+
+### Get Network Configuration [GET]
+Returns a dictionary describing current box configuration.
+
++ Response 200 (application/json)
+
+        {
+          "liquid_hostname": "liquidnode.liquid",
+          "network": {
+            "hotspot": {
+              "ssid": "foo",
+              "password": "bar",
+              "dhcp_server": {
+                "ip": "10.0.0.1",
+                "netmask": "255.255.255.0",
+                "dhcp_range": "some_magic_dnsmasq_string?"
+              }
+            },
+            "lan": {
+              "interface": "ethernet | none",
+              "mode": "dhcp_server | static",
+              "dhcp_server": {
+                "ip": "10.0.0.1",
+                "netmask": "255.255.255.0",
+                "dhcp_range": "some_magic_dnsmasq_string?"
+              },
+              "static": {
+                "ip": "192.168.66.66",
+                "netmask": "255.255.255.0",
+                "gateway": "192.168.66.1",
+                "dns_server": "192.168.66.1"
+              }
+            },
+            "wan": {
+              "interface": "ethernet | wifi | none",
+              "wifi": {
+                "ssid": "foo",
+                "password": "bar"
+              },
+              "mode": "dhcp_client | static",
+              "static": {
+                "ip": "192.168.66.66",
+                "netmask": "255.255.255.0",
+                "gateway": "192.168.66.1",
+                "dns_server": "192.168.66.1"
+              }
+            }
+          },
+          "ssh": {
+            "enabled": "true | false",
+            "authorized_keys": [
+              "key 1",
+              "key 2",
+              "key 3"
+            ],
+            "port": 22
+          }
+        }
+
+
+
+### Update Network Configuration [PUT]
+Takes a JSON document describing the desired node configuration.
+
+Updates the configuration of a running Liquid Node.
+
++ Request
+
+        {
+          "liquid_hostname": "liquidnode.liquid",
+          "network": {
+            "hotspot": {
+              "ssid": "foo",
+              "password": "bar",
+              "dhcp_server": {
+                "ip": "10.0.0.1",
+                "netmask": "255.255.255.0",
+                "dhcp_range": "some_magic_dnsmasq_string?"
+              }
+            },
+            "lan": {
+              "interface": "ethernet | none",
+              "mode": "dhcp_server | static",
+              "dhcp_server": {
+                "ip": "10.0.0.1",
+                "netmask": "255.255.255.0",
+                "dhcp_range": "some_magic_dnsmasq_string?"
+              },
+              "static": {
+                "ip": "192.168.66.66",
+                "netmask": "255.255.255.0",
+                "gateway": "192.168.66.1",
+                "dns_server": "192.168.66.1"
+              }
+            },
+            "wan": {
+              "interface": "ethernet | wifi | none",
+              "wifi": {
+                "ssid": "foo",
+                "password": "bar"
+              },
+              "mode": "dhcp_client | static",
+              "static": {
+                "ip": "192.168.66.66",
+                "netmask": "255.255.255.0",
+                "gateway": "192.168.66.1",
+                "dns_server": "192.168.66.1"
+              }
+            }
+          },
+          "ssh": {
+            "enabled": "true | false",
+            "authorized_keys": [
+              "key 1",
+              "key 2",
+              "key 3"
+            ],
+            "port": 22
+          }
+        }
+
+
++ Response 200 (application/json)
+
+
+# Group Admin Panel Endpoints
+
+
+## Discovered Nodes [/discovery/nodes]
+
+### Get List of Discovered Nodes [GET]
+Returns the current list of discovered nodes.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "foo.liquid",
+                "whitelisted": true,
+                "discovery_interface": "interface_name",
+                "last_seen": "date in ISO fmt",
+            },
+            {
+                "name": "bar.liquid",
+                "whitelisted": false,
+                "discovery_interface": "interface_name",
+                "last_seen": "date in ISO fmt",
+            }
+        ]
+
+
+## Specific Node [/discovery/nodes/{name}]
+
+### Mark a node as whitelisted/not whitelisted [PUT]
+Specify whether a node is in the whitelist.
+
++ Request
+
+        { 
+            "whitelisted": true 
+        }
+
++ Request
+
+        { 
+            "whitelisted": false 
+        }
+
++ Response 200 (application/json)
+
+
+## Supported Services [/services]
+
+### Get list of supported services [GET]
+Returns the details of all supported services and their status.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "hypothesis",
+                "status": "enabled",
+                "error_message": null
+            },
+            {
+                "name": "hoover",
+                "status": "disabled"
+                "error_message": null
+            }
+        ]
+
+## Specific Service [/services/{name}]
+
+### Set the status of the specified service [PUT]
+Changes the status of the specified service.
+
+If a service status is changed to 'disabled', it will be immediately 
+disabled and will not start on subsequent boots.
+
+If a service status is changed to 'enabled', it will be immediately enabled
+and will start on subsequent boots.
+
++ Request 200 (application/json)
+
+        {
+            "enabled": true
+        }
+        
++ Request 200 (application/json)
+
+        {
+            "enabled": false
+        }
+
+
++ Response 200 (application/json)
+
+## User Endpoints [/users]
+WIP - need to research what django provides for user management. This should be obvious
+(user list, user update, user delete)
+
+## VPN Endpoints [/vpn]
+WIP - need to clearly
