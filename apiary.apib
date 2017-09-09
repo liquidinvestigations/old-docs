@@ -24,57 +24,42 @@ Returns a dictionary describing current box configuration.
 + Response 200 (application/json)
 
         {
-          "liquid_hostname": "liquidnode.liquid",
           "network": {
-            "hotspot": {
-              "ssid": "foo",
-              "password": "bar",
-              "dhcp_server": {
-                "ip": "10.0.0.1",
-                "netmask": "255.255.255.0",
-                "dhcp_range": "some_magic_dnsmasq_string?"
-              }
-            },
+            "domain": "liquidnode.liquid",
             "lan": {
-              "interface": "ethernet | none",
-              "mode": "dhcp_server | static",
-              "dhcp_server": {
-                "ip": "10.0.0.1",
-                "netmask": "255.255.255.0",
-                "dhcp_range": "some_magic_dnsmasq_string?"
-              },
-              "static": {
-                "ip": "192.168.66.66",
-                "netmask": "255.255.255.0",
-                "gateway": "192.168.66.1",
-                "dns_server": "192.168.66.1"
-              }
-            },
-            "wan": {
-              "interface": "ethernet | wifi | none",
-              "wifi": {
+              "ip": "10.0.0.1",
+              "netmask": "255.255.255.0",
+              "dhcp_range": "10.0.0.100-255",
+              "hotspot": {
                 "ssid": "foo",
                 "password": "bar"
               },
-              "mode": "dhcp_client | static",
+              "eth": false
+            },
+            "wan": {
               "static": {
                 "ip": "192.168.66.66",
                 "netmask": "255.255.255.0",
                 "gateway": "192.168.66.1",
                 "dns_server": "192.168.66.1"
-              }
+              },
+              "wifi": [
+                {"ssid1": "pass1"},
+                {"ssid2": "pass2"}
+              ]
+            },
+            "ssh": {
+              "enabled": true,
+              "authorized_keys": [
+                "key 1",
+                "key 2",
+                "key 3"
+              ],
+              "port": 22
             }
-          },
-          "ssh": {
-            "enabled": "true | false",
-            "authorized_keys": [
-              "key 1",
-              "key 2",
-              "key 3"
-            ],
-            "port": 22
           }
         }
+
 
 
 
@@ -86,57 +71,42 @@ Updates the configuration of a running Liquid Node.
 + Request
 
         {
-          "liquid_hostname": "liquidnode.liquid",
           "network": {
-            "hotspot": {
-              "ssid": "foo",
-              "password": "bar",
-              "dhcp_server": {
-                "ip": "10.0.0.1",
-                "netmask": "255.255.255.0",
-                "dhcp_range": "some_magic_dnsmasq_string?"
-              }
-            },
+            "domain": "liquidnode.liquid",
             "lan": {
-              "interface": "ethernet | none",
-              "mode": "dhcp_server | static",
-              "dhcp_server": {
-                "ip": "10.0.0.1",
-                "netmask": "255.255.255.0",
-                "dhcp_range": "some_magic_dnsmasq_string?"
-              },
-              "static": {
-                "ip": "192.168.66.66",
-                "netmask": "255.255.255.0",
-                "gateway": "192.168.66.1",
-                "dns_server": "192.168.66.1"
-              }
-            },
-            "wan": {
-              "interface": "ethernet | wifi | none",
-              "wifi": {
+              "ip": "10.0.0.1",
+              "netmask": "255.255.255.0",
+              "dhcp_range": "10.0.0.100-255",
+              "hotspot": {
                 "ssid": "foo",
                 "password": "bar"
               },
-              "mode": "dhcp_client | static",
+              "eth": false
+            },
+            "wan": {
               "static": {
                 "ip": "192.168.66.66",
                 "netmask": "255.255.255.0",
                 "gateway": "192.168.66.1",
                 "dns_server": "192.168.66.1"
-              }
+              },
+              "wifi": [
+                {"ssid1": "pass1"},
+                {"ssid2": "pass2"}
+              ]
+            },
+            "ssh": {
+              "enabled": true,
+              "authorized_keys": [
+                "key 1",
+                "key 2",
+                "key 3"
+              ],
+              "port": 22
             }
-          },
-          "ssh": {
-            "enabled": "true | false",
-            "authorized_keys": [
-              "key 1",
-              "key 2",
-              "key 3"
-            ],
-            "port": 22
           }
         }
+
 
 
 + Response 200 (application/json)
