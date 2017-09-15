@@ -5,6 +5,23 @@ HOST: http://liquidinvestigations.apiblueprint.org/
 
 API allowing for Liquid Investigations system management
 
+# Group Initial Device Setup
+
+## Registration [/setup/registration]
+
+### Send initial admin registration [POST]
+
+In the first page of the setup wizard, the user is asked for "Domain", "Username", "Password" and "Password Confirmation".
+
++ Request
+
+        {
+            "domain": "liquidnode.liquid",
+            "username": "johnDoe",
+            "password": "123b456x"
+        }
+
++ Response 200
 
 # Group Network Management Endpoints
 
@@ -44,7 +61,7 @@ Returns a dictionary describing current box configuration.
                 "dns_server": "192.168.66.1"
               },
               "wifi": {
-                "username": "user",
+                "ssid": "network",
                 "password": "password"
               }
             },
@@ -61,6 +78,67 @@ Returns a dictionary describing current box configuration.
         }
 
 
++ Response 200 (application/json)
+
+        {
+          "network": {
+            "domain": "example.org",
+            "lan": {
+              "ip": "192.168.0.1",
+              "netmask": "255.255.255.0",
+              "dhcp_range": "192.168.0.60-99",
+              "hotspot": {
+                "ssid": "starbucks",
+                "password": "mcdonalds"
+              },
+              "eth": true
+            },
+            "wan": {
+              "wifi": {
+                "ssid": "hotel",
+                "password": "ritter"
+              }
+            },
+            "ssh": {
+              "enabled": true,
+              "authorized_keys": [
+                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsR3in+84KcH/GHAksqczRE5S+wDgB8qB+SJxvzWw3qjwPSohvuR4WXdQ9UCqjWq/6uGYq79EHlzlKE9P6lJbhEgf9FRwv8k8MSqDjhoQ5QZeXaEE750+PZLK/pb2MkriNXIGxg6ul8V+F0o4XnkVLbefMhQDzLDVgyg0dFwp6TGVqpufmD6gvvwnQD5BHSFMQT3MSq6o/wQj3hc/yhHlhwJ4+6iC7bdBv426fGdCs+nbi2BjXHzLEf7bLks5vOTJexGTHdfPlb5JOBTTfzZ0Kw0BMBjTnJpnRcyGOvQJ/K/a7ye/xusG/ZyDh/NsghPX2BjFPfbN3rW5hzvr3PZhn john@box",
+                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIhO6MpIaOpVSiQ4NLfVgHgvJSqoqDow3ZaD7uaOYX2c03aKOMmPAyOMGbaETQ0J2TB0vT04bao7zFyuAbOsORLNzeSXTqRNycu66ckRGTe+fDBLi5S91IEIiHbjLSNpsbOBhiMCbiPvT3FWYutaU1o9QJS638WIzgtAbNshRfoW11m2SEJnrDDEII6QkEl+tRNKDOBzygVCPZv2urcSsP5j1quBGhgCmlQaUrRc8t/QjJzhjSlO2x28b1fGM0HPfAcXnW8pw+J296rma6TElVZ9Gg/wjMBjKdFYH5aic5r0bUAjGCBO9E+/6cNx1uglsP/vbLmM5cQMKe9R8s3Fbt gabriel@static",
+                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAEgQDQXZRsJ0cqz70i4k0X+86utj7nq57e+RRcJLYiT7dq04gYREf3cAHGxvZXdDDmpzlfoANaB9/XMIkjdRQzND7DKe9VvjetyC7GUCeV8jLcCEeR8iBTEFXhc77ZbwSxDx0yAksyBvYGoutj2M0AGMEGdo1tArHp9XiF9khEymhdjFFUj1MZz9ZJGfnz4wLx2/kvZEjUOCoDbL42vBj5TWEkxYcZVb3TrUSV5I2w56X7pNgXjP3SSTQqSEN0iqOTDR2LCZENbIPCKRbJZf9rQcwTV3BfoI6VrDm2+q+L8G05NG3Z6EWEuzzzxGMrXuUOiKeMFU/Ei5pLPzWQD/L05MZQ0wUvOKU0KGEDH1DKIwGOZszFezwF9bzubYRpwErq6VM8/j3W2AXLq07TWibkRm5eppinmsCNIZ+Z/WnornkH4Ch5lkcVkePKDMi4nX0YdFbRD3aNvOJMoHHmukNuhYitwfAsQ044OgTQHLEwlnvwTDY1N4ec+w8xPovXZwGjcQH9sLuKSLtp22Ag2QyFJRENuIBAoz/OjATXghD9scA9hHFfzrvbqFmdsjQsqmqr9uiO/qWaUyxOS78019bWxptAaxPA9XTRrrkoua3+gRED6ZgoZ9tErWjfufm//nZ/OQ1DVj76fMMoRZYLyPVXYYNh91DfmMSbqdzFzc0DbhvcjbGjqY/a3KoMsA+1vEqioDyXk3Q0QRByEDz8mZtP5nvxIWLVYICmcB9J+YT/1TkNvaxJxYiIoZkjKjExgtBBRNHukExxpoOKH4cl/yh7dw6XPCtLceASgbZakGJNxlfw3J2H2r383YUsHZOiHXbP9n8nq52ivrZmQigksoxvjgmp1pZ0JC+wnDxxkN5x/vfcp2AkdAEYX4TKgKu1cwqSZ6pguDtb6JgXYcdDCjcAkp/xZstp9S3AhlNOdSURmE7lVF2sk3pmGXoHepXOzQodzhJuIX5U3tb1cyuSXKIhtED32BUivr4kNgKho/u0dA7ppLSMEtyZ9qa6WwY3XBoT+hOfuIsARwY76UhfTx7uzpwjbctZuu9cff0ficVMwLrkR/DUKuH7vRRpT13SOtr8b+rAHHZL07nuB6nrcEFTpCdV56oim0c6GUmwy/KEtLhp/LawcEomnpoBsbXfb8XrMHK6yRfk+D4l7mmaqptaxz8NuqaXtmNQ3xDlLOa3wYDCXtMDSjRixpyudZ2eu7d7y6YlVWAJmK1oim2nOXRMAXYRtzVR/9qjhPdgV7r5dAyoeZjOjlrK/WOzaCNkoz57atew+uVTXLVsgYLQAXfWSn0kKNnpnvOz5IvywiWIbgLFOZYR19fmEwdCYxZl2NDVZknuMpkwacfM9a8HT6pPe3xrrcCwm+tmscHwIIh+YirwZPFcqsQvjzSFgbyj14jwiLdYGrYDmh0EJgho26kKErqDAvLGjXiJKjZj3ouMaKhnwu+jefuftgiZKssJIHbqBMbKWCVFyaJNUlf75G42mAzYO+DuYPKde4+fQCxpVHZEvwo6rQHDtKYEC0YvIv0rbt8= panda@panda.panda"
+              ],
+              "port": 2222
+            }
+          }
+        }
+
++ Response 200 (application/json)
+
+        {
+          "network": {
+            "domain": "my-box.interesting-devices.com",
+            "lan": {
+              "ip": "192.168.0.1",
+              "netmask": "255.255.255.0",
+              "dhcp_range": "192.168.0.60-99",
+              "hotspot": {
+                "ssid": "ACME CONSULTING",
+                "password": "bugs bunny 123"
+              },
+              "eth": false
+            },
+            "wan": {
+              "wifi": {
+                "ssid": "this_is_my_wifi",
+                "password": "1234567890@!#$%^&*()_+-=][}{\""
+              }
+            },
+            "ssh": {
+              "enabled": false,
+              "authorized_keys": [],
+              "port": 22
+            }
+          }
+        }
 
 
 ### Update Network Configuration [PUT]
@@ -91,7 +169,7 @@ Updates the configuration of a running Liquid Node.
                 "dns_server": "192.168.66.1"
               },
               "wifi": {
-                "username": "user",
+                "ssid": "user",
                 "password": "password"
               }
             },
