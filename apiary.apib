@@ -282,9 +282,53 @@ and will start on subsequent boots.
 
 ## User Endpoints [/users]
 
- 
-WIP - need to research what django provides for user management. This should be obvious
-(user list, user update, user delete)
+### List users [GET]
+
++ Response 200 (application/json)
+
+        [
+            { 
+                "username": "admin",
+                "is_admin": true,
+                "first_name": "Mike",
+                "last_name": "Tyson"
+            },
+            { 
+                "username": "gigel",
+                "is_admin": false,
+                "first_name": "Gigel",
+                "last_name": "Ion"
+            }
+        ]
+        
+## Specific User Endpoint [/users/{username}]
+
+### Change User [PUT]
+
++ Request 200 (application/json)
+
+        { 
+            "is_admin": true,
+            "first_name": "Mike",
+            "last_name": "Tyson"
+        }
+
++ Response 200
+
+### Remove user [DELETE]
+
++ Response 200
+
+
+### Change User Password [/usrs/{username}/password]
+
++ Request 
+
+        {
+            "old_password": "mama nu are mere",
+            "new_password": "mama are mere"
+        }
+ ma
 
 ## VPN Endpoints [/vpn]
 WIP - need to clearly
