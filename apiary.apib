@@ -33,6 +33,9 @@ how many clients?)
 
 + Response 200 (application/json)
 
+        {}
+
+
 ## Configuration [/network/config]
 
 ### Get Network Configuration [GET]
@@ -204,12 +207,14 @@ Returns the current list of discovered nodes.
                 "whitelisted": true,
                 "discovery_interface": "interface_name",
                 "last_seen": "date in ISO fmt",
+                "address": "102.168.0.222"
             },
             {
                 "name": "bar.liquid",
                 "whitelisted": false,
                 "discovery_interface": "interface_name",
                 "last_seen": "date in ISO fmt",
+                "address": "102.168.0.111"
             }
         ]
 
@@ -245,12 +250,16 @@ Returns the details of all supported services and their status.
             {
                 "name": "hypothesis",
                 "status": "enabled",
-                "error_message": null
+                "started": true,
+                "error_message": null,
+                "url": "hypothesis.liquid.domain"
             },
             {
                 "name": "hoover",
                 "status": "disabled",
-                "error_message": null
+                "started": false,
+                "error_message": null,
+                "url": "hoover.liquid.domain"
             }
         ]
 
@@ -280,6 +289,19 @@ and will start on subsequent boots.
 
 + Response 200 (application/json)
 
+## Current user data [/users/whoami]
+
+### Find out what user is logged in [GET]
+
++ Response 200 (application/json)
+
+        { 
+                "username": "admin",
+                "is_admin": true,
+                "first_name": "Mike",
+                "last_name": "Tyson"
+        }
+
 ## User Endpoints [/users]
 
 ### List users [GET]
@@ -303,7 +325,7 @@ and will start on subsequent boots.
         
 ## Specific User Endpoint [/users/{username}]
 
-### Change User [PUT]
+### Edit User [PUT]
 
 + Request 200 (application/json)
 
@@ -328,7 +350,6 @@ and will start on subsequent boots.
             "old_password": "mama nu are mere",
             "new_password": "mama are mere"
         }
- ma
 
 ## VPN Endpoints [/vpn]
 WIP - need to clearly
