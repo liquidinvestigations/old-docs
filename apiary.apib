@@ -8,7 +8,6 @@ API allowing for Liquid Investigations system management
 # Group Initial Device Setup
 
 ## Registration [/setup/registration]
-
 ### Send initial admin registration [POST]
 
 In the first page of the setup wizard, the user is asked for "Domain", "Username", "Password" and "Password Confirmation".
@@ -226,7 +225,7 @@ Specify whether a node is in the whitelist.
 
 + Request
 
-        { 
+        {
             "whitelisted": true 
         }
 
@@ -322,14 +321,14 @@ and will start on subsequent boots.
                 "last_name": "Ion"
             }
         ]
-        
+
 ## Specific User Endpoint [/users/{username}]
 
 ### Edit User [PUT]
 
 + Request 200 (application/json)
 
-        { 
+        {
             "is_admin": true,
             "first_name": "Mike",
             "last_name": "Tyson"
@@ -343,6 +342,8 @@ and will start on subsequent boots.
 
 
 ### Change User Password [/usrs/{username}/password]
+
+If caller is admin, the `old_password` field is not needed.
 
 + Request 
 
