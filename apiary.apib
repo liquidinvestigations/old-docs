@@ -7,7 +7,7 @@ API allowing for Liquid Investigations system management
 
 # Group Initial Device Setup
 
-## Registration [/setup/registration]
+## Registration [/api/registration]
 ### Send initial admin registration [POST]
 
 In the first page of the setup wizard, the user is asked for "Domain", "Username", "Password" and "Password Confirmation".
@@ -24,7 +24,7 @@ In the first page of the setup wizard, the user is asked for "Domain", "Username
 
 # Group Network Management Endpoints
 
-## Status [/network/status]
+## Status [/api/network/status]
 
 ### Get Network Status [GET]
 Returns a dictionary describing the current status of the network (connected? via which interfaces?
@@ -35,16 +35,31 @@ how many clients?)
         {}
 
 
-## Configuration [/network/config]
+## Domain Configuration [/api/network/domain]
 
-### Get Network Configuration [GET]
-Returns a dictionary describing current box configuration.
+### Get Network Domain [GET]
+
++ Response 200 (application/json)
+
+        {"domain": "liquid.local"}
+
+
+### Update Network Domain [PUT]
+
++ Request
+
+        {"domain": "liquid.local"}
+        
++ Response 200 (application/json)
+
+
+## LAN Configuration [/api/network/lan]
+
+### Get Network LAN [GET]
 
 + Response 200 (application/json)
 
         {
-          "network": {
-            "domain": "liquidnode.liquid",
             "lan": {
               "ip": "10.0.0.1",
               "netmask": "255.255.255.0",
@@ -54,7 +69,36 @@ Returns a dictionary describing current box configuration.
                 "password": "bar"
               },
               "eth": false
-            },
+            }
+        }
+
+
+### Update Network LAN [PUT]
+
++ Request
+
+        {
+            "lan": {
+              "ip": "10.0.0.1",
+              "netmask": "255.255.255.0",
+              "dhcp_range": "10.0.0.100-255",
+              "hotspot": {
+                "ssid": "foo",
+                "password": "bar"
+              },
+              "eth": false
+            }
+        }
+        
++ Response 200 (application/json)
+
+## WAN Configuration [/api/network/wan]
+
+### Get Network WAN [GET]
+
++ Response 200 (application/json)
+
+        {
             "wan": {
               "static": {
                 "ip": "192.168.66.66",
@@ -66,7 +110,38 @@ Returns a dictionary describing current box configuration.
                 "ssid": "network",
                 "password": "password"
               }
-            },
+            }
+        }
+
+
+### Update Network WAN [PUT]
+
++ Request
+
+        {
+            "wan": {
+              "static": {
+                "ip": "192.168.66.66",
+                "netmask": "255.255.255.0",
+                "gateway": "192.168.66.1",
+                "dns_server": "192.168.66.1"
+              },
+              "wifi": {
+                "ssid": "network",
+                "password": "password"
+              }
+            }
+        }
+        
++ Response 200 (application/json)
+
+## SSH Configuration [/api/network/ssh]
+
+### Get Network SSH config [GET]
+
++ Response 200 (application/json)
+
+        {
             "ssh": {
               "enabled": true,
               "authorized_keys": [
@@ -76,124 +151,32 @@ Returns a dictionary describing current box configuration.
               ],
               "port": 22
             }
-          }
         }
 
 
-+ Response 200 (application/json)
-
-        {
-          "network": {
-            "domain": "example.org",
-            "lan": {
-              "ip": "192.168.0.1",
-              "netmask": "255.255.255.0",
-              "dhcp_range": "192.168.0.60-99",
-              "hotspot": {
-                "ssid": "starbucks",
-                "password": "mcdonalds"
-              },
-              "eth": true
-            },
-            "wan": {
-              "wifi": {
-                "ssid": "hotel",
-                "password": "ritter"
-              }
-            },
-            "ssh": {
-              "enabled": true,
-              "authorized_keys": [
-                {"key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsR3in+84KcH/GHAksqczRE5S+wDgB8qB+SJxvzWw3qjwPSohvuR4WXdQ9UCqjWq/6uGYq79EHlzlKE9P6lJbhEgf9FRwv8k8MSqDjhoQ5QZeXaEE750+PZLK/pb2MkriNXIGxg6ul8V+F0o4XnkVLbefMhQDzLDVgyg0dFwp6TGVqpufmD6gvvwnQD5BHSFMQT3MSq6o/wQj3hc/yhHlhwJ4+6iC7bdBv426fGdCs+nbi2BjXHzLEf7bLks5vOTJexGTHdfPlb5JOBTTfzZ0Kw0BMBjTnJpnRcyGOvQJ/K/a7ye/xusG/ZyDh/NsghPX2BjFPfbN3rW5hzvr3PZhn john@box"},
-                {"key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIhO6MpIaOpVSiQ4NLfVgHgvJSqoqDow3ZaD7uaOYX2c03aKOMmPAyOMGbaETQ0J2TB0vT04bao7zFyuAbOsORLNzeSXTqRNycu66ckRGTe+fDBLi5S91IEIiHbjLSNpsbOBhiMCbiPvT3FWYutaU1o9QJS638WIzgtAbNshRfoW11m2SEJnrDDEII6QkEl+tRNKDOBzygVCPZv2urcSsP5j1quBGhgCmlQaUrRc8t/QjJzhjSlO2x28b1fGM0HPfAcXnW8pw+J296rma6TElVZ9Gg/wjMBjKdFYH5aic5r0bUAjGCBO9E+/6cNx1uglsP/vbLmM5cQMKe9R8s3Fbt gabriel@static"},
-                {"key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAEgQDQXZRsJ0cqz70i4k0X+86utj7nq57e+RRcJLYiT7dq04gYREf3cAHGxvZXdDDmpzlfoANaB9/XMIkjdRQzND7DKe9VvjetyC7GUCeV8jLcCEeR8iBTEFXhc77ZbwSxDx0yAksyBvYGoutj2M0AGMEGdo1tArHp9XiF9khEymhdjFFUj1MZz9ZJGfnz4wLx2/kvZEjUOCoDbL42vBj5TWEkxYcZVb3TrUSV5I2w56X7pNgXjP3SSTQqSEN0iqOTDR2LCZENbIPCKRbJZf9rQcwTV3BfoI6VrDm2+q+L8G05NG3Z6EWEuzzzxGMrXuUOiKeMFU/Ei5pLPzWQD/L05MZQ0wUvOKU0KGEDH1DKIwGOZszFezwF9bzubYRpwErq6VM8/j3W2AXLq07TWibkRm5eppinmsCNIZ+Z/WnornkH4Ch5lkcVkePKDMi4nX0YdFbRD3aNvOJMoHHmukNuhYitwfAsQ044OgTQHLEwlnvwTDY1N4ec+w8xPovXZwGjcQH9sLuKSLtp22Ag2QyFJRENuIBAoz/OjATXghD9scA9hHFfzrvbqFmdsjQsqmqr9uiO/qWaUyxOS78019bWxptAaxPA9XTRrrkoua3+gRED6ZgoZ9tErWjfufm//nZ/OQ1DVj76fMMoRZYLyPVXYYNh91DfmMSbqdzFzc0DbhvcjbGjqY/a3KoMsA+1vEqioDyXk3Q0QRByEDz8mZtP5nvxIWLVYICmcB9J+YT/1TkNvaxJxYiIoZkjKjExgtBBRNHukExxpoOKH4cl/yh7dw6XPCtLceASgbZakGJNxlfw3J2H2r383YUsHZOiHXbP9n8nq52ivrZmQigksoxvjgmp1pZ0JC+wnDxxkN5x/vfcp2AkdAEYX4TKgKu1cwqSZ6pguDtb6JgXYcdDCjcAkp/xZstp9S3AhlNOdSURmE7lVF2sk3pmGXoHepXOzQodzhJuIX5U3tb1cyuSXKIhtED32BUivr4kNgKho/u0dA7ppLSMEtyZ9qa6WwY3XBoT+hOfuIsARwY76UhfTx7uzpwjbctZuu9cff0ficVMwLrkR/DUKuH7vRRpT13SOtr8b+rAHHZL07nuB6nrcEFTpCdV56oim0c6GUmwy/KEtLhp/LawcEomnpoBsbXfb8XrMHK6yRfk+D4l7mmaqptaxz8NuqaXtmNQ3xDlLOa3wYDCXtMDSjRixpyudZ2eu7d7y6YlVWAJmK1oim2nOXRMAXYRtzVR/9qjhPdgV7r5dAyoeZjOjlrK/WOzaCNkoz57atew+uVTXLVsgYLQAXfWSn0kKNnpnvOz5IvywiWIbgLFOZYR19fmEwdCYxZl2NDVZknuMpkwacfM9a8HT6pPe3xrrcCwm+tmscHwIIh+YirwZPFcqsQvjzSFgbyj14jwiLdYGrYDmh0EJgho26kKErqDAvLGjXiJKjZj3ouMaKhnwu+jefuftgiZKssJIHbqBMbKWCVFyaJNUlf75G42mAzYO+DuYPKde4+fQCxpVHZEvwo6rQHDtKYEC0YvIv0rbt8= panda@panda.panda"}
-              ],
-              "port": 2222
-            }
-          }
-        }
-
-+ Response 200 (application/json)
-
-        {
-          "network": {
-            "domain": "my-box.interesting-devices.com",
-            "lan": {
-              "ip": "192.168.0.1",
-              "netmask": "255.255.255.0",
-              "dhcp_range": "192.168.0.60-99",
-              "hotspot": {
-                "ssid": "ACME CONSULTING",
-                "password": "bugs bunny 123"
-              },
-              "eth": false
-            },
-            "wan": {
-              "wifi": {
-                "ssid": "this_is_my_wifi",
-                "password": "1234567890@!#$%^&*()_+-=][}{\""
-              }
-            },
-            "ssh": {
-              "enabled": false,
-              "authorized_keys": [],
-              "port": 22
-            }
-          }
-        }
-
-
-### Update Network Configuration [PUT]
-Takes a JSON document describing the desired node configuration.
-
-Updates the configuration of a running Liquid Node.
+### Update Network SSH config [PUT]
 
 + Request
 
         {
-          "network": {
-            "domain": "liquidnode.liquid",
-            "lan": {
-              "ip": "10.0.0.1",
-              "netmask": "255.255.255.0",
-              "dhcp_range": "10.0.0.100-255",
-              "hotspot": {
-                "ssid": "foo",
-                "password": "bar"
-              },
-              "eth": false
-            },
-            "wan": {
-              "static": {
-                "ip": "192.168.66.66",
-                "netmask": "255.255.255.0",
-                "gateway": "192.168.66.1",
-                "dns_server": "192.168.66.1"
-              },
-              "wifi": {
-                "ssid": "user",
-                "password": "password"
-              }
-            },
             "ssh": {
               "enabled": true,
               "authorized_keys": [
-                {"key": "abcd"},{"key": "abcd"},{"key": "abcd"}
+                {"key": "key 1"},
+                {"key": "key 2"},
+                {"key": "key 3"}
               ],
               "port": 22
             }
-          }
         }
-
-
-
+        
 + Response 200 (application/json)
 
 
 # Group Admin Panel Endpoints
 
 
-## Discovered Nodes [/discovery/nodes]
+## Discovered Nodes [/api/discovery/nodes]
 
 ### Get List of Discovered Nodes [GET]
 Returns the current list of discovered nodes.
@@ -217,8 +200,21 @@ Returns the current list of discovered nodes.
             }
         ]
 
+## Specific Discovered Node [/api/discovery/nodes/{name}]
 
-## Specific Node [/discovery/nodes/{name}]
+### Get specific node [GET]
+
++ Response 200 (application/json)
+
+        {
+            "name": "foo.liquid",
+            "whitelisted": true,
+            "discovery_interface": "interface_name",
+            "last_seen": "date in ISO fmt",
+            "address": "102.168.0.222"
+        }
+
+## Specific Node Whitelist [/api/discovery/nodes/{name}/trusted]
 
 ### Mark a node as whitelisted/not whitelisted [PUT]
 Specify whether a node is in the whitelist.
@@ -226,19 +222,19 @@ Specify whether a node is in the whitelist.
 + Request
 
         {
-            "whitelisted": true 
+            "trusted": true 
         }
 
 + Request
 
         { 
-            "whitelisted": false 
+            "trusted": false 
         }
 
 + Response 200 (application/json)
 
 
-## Supported Services [/services]
+## List Supported Services [/api/services]
 
 ### Get list of supported services [GET]
 Returns the details of all supported services and their status.
@@ -248,21 +244,36 @@ Returns the details of all supported services and their status.
         [
             {
                 "name": "hypothesis",
-                "status": "enabled",
-                "started": true,
+                "is_enabled": true,
+                "state_description": "starting",
                 "error_message": null,
                 "url": "hypothesis.liquid.domain"
             },
             {
                 "name": "hoover",
-                "status": "disabled",
-                "started": false,
-                "error_message": null,
+                "is_enabled": false,
+                "state_description": "error",
+                "error_message": "Hoover crashed",
                 "url": "hoover.liquid.domain"
             }
         ]
+        
+## Detail Supported Service [/api/services/{name}]
 
-## Specific Service [/services/{name}]
+### Get details for supported service [GET]
+
++ Response 200 (application/json)
+
+        
+        {
+            "name": "hoover",
+            "is_enabled": false,
+            "state_description": "error",
+            "error_message": null,
+            "url": "hoover.liquid.domain"
+        }
+
+## Enable Specific Service [/api/services/{name}/enabled]
 
 ### Set the status of the specified service [PUT]
 Changes the status of the specified service.
@@ -276,32 +287,42 @@ and will start on subsequent boots.
 + Request 200 (application/json)
 
         {
-            "enabled": true
+            "is_enabled": true
         }
         
 + Request 200 (application/json)
 
         {
-            "enabled": false
+            "is_enabled": false
         }
 
 
 + Response 200 (application/json)
 
-## Current user data [/users/whoami]
+## Current user data [/api/users/whoami]
 
 ### Find out what user is logged in [GET]
+If the user "Mike Tyson" is logged in:
 
 + Response 200 (application/json)
 
         { 
-                "username": "admin",
-                "is_admin": true,
-                "first_name": "Mike",
-                "last_name": "Tyson"
+            "is_authenticated": true,
+            "username": "admin",
+            "is_admin": true,
+            "first_name": "Mike",
+            "last_name": "Tyson",
+            "is_active": true
         }
 
-## User Endpoints [/users]
+
++ Response 200 (application/json)
+
+        {
+            "is_authenticated": false
+        }
+        
+## List User Endpoints [/api/users]
 
 ### List users [GET]
 
@@ -312,17 +333,32 @@ and will start on subsequent boots.
                 "username": "admin",
                 "is_admin": true,
                 "first_name": "Mike",
-                "last_name": "Tyson"
+                "last_name": "Tyson",
+                "is_active": true
             },
             { 
                 "username": "gigel",
                 "is_admin": false,
                 "first_name": "Gigel",
-                "last_name": "Ion"
+                "last_name": "Ion",
+                "is_active": true
             }
         ]
 
-## Specific User Endpoint [/users/{username}]
+## Specific User Endpoint [/api/users/{username}]
+
+### Get Specific User [GET]
+
++ Response 200
+
+
+        {
+            "username": "admin",
+            "is_admin": true,
+            "first_name": "Mike",
+            "last_name": "Tyson",
+            "is_active": true
+        }
 
 ### Edit User [PUT]
 
@@ -331,19 +367,29 @@ and will start on subsequent boots.
         {
             "is_admin": true,
             "first_name": "Mike",
-            "last_name": "Tyson"
+            "last_name": "Tyson",
+            "is_active": true
         }
 
 + Response 200
 
-### Remove user [DELETE]
+## Specific User Endpoint [/api/users/{username}/active]
 
-+ Response 200
+### Edit User [PUT]
+
++ Request 200 (application/json)
+
+        {
+            "is_active": true
+        }
+        
++ Response 200 (application/json)
 
 
-## Change Password for Specific User [/users/{username}/password]
 
-### Change User Password [PO
+## Change Password for Specific User [/api/users/{username}/password]
+
+### Change User Password [POST]
 
 If caller is admin, the `old_password` field is not needed.
 
@@ -353,6 +399,8 @@ If caller is admin, the `old_password` field is not needed.
             "old_password": "mama nu are mere",
             "new_password": "mama are mere"
         }
+        
++ Response 200 (application/json)
 
-## VPN Endpoints [/vpn]
+## VPN Endpoints [/api/vpn]
 WIP - need to clearly
