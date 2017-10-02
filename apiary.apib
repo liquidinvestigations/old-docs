@@ -176,7 +176,7 @@ how many clients?)
 # Group Admin Panel Endpoints
 
 
-## Discovered Nodes [/api/discovery/nodes]
+## Discovered Nodes [/api/nodes]
 
 ### Get List of Discovered Nodes [GET]
 Returns the current list of discovered nodes.
@@ -185,36 +185,48 @@ Returns the current list of discovered nodes.
 
         [
             {
-                "name": "foo.liquid",
-                "whitelisted": true,
-                "discovery_interface": "interface_name",
-                "last_seen": "date in ISO fmt",
-                "address": "102.168.0.222"
+                "id": 28,
+                "hostname": "foo.liquid",
+                "is_trusted": true,
+                "data": {
+                    "address": "102.168.0.222",
+                    "discovery_interface": "interface_name",
+                    "last_seen_at": "date in ISO fmt",
+                    "discovered_at": "date in ISO fmt"
+                }
             },
             {
-                "name": "bar.liquid",
-                "whitelisted": false,
-                "discovery_interface": "interface_name",
-                "last_seen": "date in ISO fmt",
-                "address": "102.168.0.111"
+                "id": 29,
+                "hostname": "bar.liquid",
+                "is_trusted": false,
+                "data": {
+                    "address": "102.168.0.111",
+                    "discovery_interface": "interface_name",
+                    "last_seen_at": "date in ISO fmt",
+                    "discovered_at": "date in ISO fmt"
+                }
             }
         ]
 
-## Specific Discovered Node [/api/discovery/nodes/{name}]
+## Specific Discovered Node [/api/nodes/{id}]
 
 ### Get specific node [GET]
 
 + Response 200 (application/json)
 
         {
-            "name": "foo.liquid",
-            "whitelisted": true,
-            "discovery_interface": "interface_name",
-            "last_seen": "date in ISO fmt",
-            "address": "102.168.0.222"
+            "id": 28,
+            "hostname": "foo.liquid",
+            "is_trusted": true,
+            "data": {
+                "address": "102.168.0.222",
+                "discovery_interface": "interface_name",
+                "last_seen_at": "date in ISO fmt",
+                "discovered_at": "date in ISO fmt"
+            }
         }
 
-## Specific Node Whitelist [/api/discovery/nodes/{name}/trusted]
+## Specific Node Whitelist [/api/nodes/{id}/trusted]
 
 ### Mark a node as whitelisted/not whitelisted [PUT]
 Specify whether a node is in the whitelist.
@@ -222,13 +234,13 @@ Specify whether a node is in the whitelist.
 + Request
 
         {
-            "trusted": true 
+            "is_trusted": true 
         }
 
 + Request
 
         { 
-            "trusted": false 
+            "is_trusted": false 
         }
 
 + Response 200 (application/json)
