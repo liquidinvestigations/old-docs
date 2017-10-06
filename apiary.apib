@@ -22,7 +22,7 @@ In the first page of the setup wizard, the user is asked for "Domain", "Username
 
 + Response 200
 
-# Group Network Management Endpoints
+# Group Network Management
 
 ## Status [/api/network/status]
 
@@ -174,7 +174,7 @@ how many clients?)
 + Response 200 (application/json)
 
 
-# Group Admin Panel Endpoints
+# Group Admin Panel
 
 
 ## Discovered Nodes [/api/nodes]
@@ -335,7 +335,7 @@ If the user "Mike Tyson" is logged in:
             "is_authenticated": false
         }
         
-## List User Endpoints [/api/users]
+## List User [/api/users]
 
 ### List users [GET]
 
@@ -386,7 +386,7 @@ If the user "Mike Tyson" is logged in:
 
 + Response 200
 
-## Specific User Endpoint [/api/users/{username}]
+## Specific User [/api/users/{username}]
 
 ### Get Specific User [GET]
 
@@ -414,7 +414,7 @@ If the user "Mike Tyson" is logged in:
 
 + Response 200
 
-## Specific User Set Active Endpoint [/api/users/{username}/active]
+## Specific User Set Active [/api/users/{username}/active]
 
 ### Set user as active [PUT]
 
@@ -443,5 +443,5 @@ If caller is admin, the `old_password` field is not needed.
         
 + Response 200 (application/json)
 
-## VPN Endpoints [/api/vpn]
+## VPN [/api/vpn]
 WIP - need to clearly
