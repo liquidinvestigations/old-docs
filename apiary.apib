@@ -371,6 +371,20 @@ If the user "Mike Tyson" is logged in:
                 "is_active": false
             }
         ]
+        
+### Create new user [POST]
+
++ Request
+
+        { 
+            "username": "admin",
+            "is_admin": true,
+            "first_name": "Mike",
+            "last_name": "Tyson",
+            "is_active": true
+        }
+
++ Response 200
 
 ## Specific User Endpoint [/api/users/{username}]
 
@@ -400,9 +414,9 @@ If the user "Mike Tyson" is logged in:
 
 + Response 200
 
-## Specific User Endpoint [/api/users/{username}/active]
+## Specific User Set Active Endpoint [/api/users/{username}/active]
 
-### Edit User [PUT]
+### Set user as active [PUT]
 
 + Request 200 (application/json)
 
