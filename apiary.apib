@@ -8,16 +8,57 @@ API allowing for Liquid Investigations system management
 # Group Initial Device Setup
 
 ## Registration [/api/registration]
+
 ### Send initial admin registration [POST]
 
-In the first page of the setup wizard, the user is asked for "Domain", "Username", "Password" and "Password Confirmation".
+Validation for these fields:
+
+- `username`: max length 64, min length 1, regex `^(\w|\.)+$`
+- `pasword`: min length 8
+- `domain`: regex `^((\w|-)+\.)+(\w+)$`
+- ipv4 fields: validate using some library. These are the following:
+    - `lan.ip`
+    - `lan.netmask`
+    - `wan.static.ip`
+    - `wan.static.netmask`
+    - `wan.static.gateway`
+    - `wan.static.dns_server`
+- `lan.hotspot.ssid` and `wan.wifi.ssid`: max length 31, min length 1
+- `lan.hotspot.password` and `wan.wifi.password`: max length 63, min length 8
+- `lan.eth`: boolean
+- `wan.static`: is optional
+- `ssh.authorized_keys`: list of strings
+- `ssh.enabled`: boolean
+- `ssh.port`: int, min 1, max 65535
+
 
 + Request
 
         {
-            "domain": "liquidnode.liquid",
             "username": "johnDoe",
-            "password": "123b456x"
+            "password": "123b456x",
+            "domain": "liquidnode.liquid",
+            "lan": {
+                "ip": "10.0.0.1",
+                "netmask": "255.255.255.0",
+                "dhcp_range": "10.0.0.100-255",
+                "hotspot": {
+                    "ssid": "",
+                    "password": ""
+                },
+                "eth": false
+            },
+            "wan": {
+                "wifi": {
+                    "ssid": "",
+                    "password": ""
+                }
+            },
+            "ssh": {
+                "enabled": false,
+                "authorized_keys": [],
+                "port": 22
+            }
         }
 
 + Response 200
@@ -49,7 +90,7 @@ how many clients?)
 + Request
 
         {"domain": "liquid.local"}
-        
+
 + Response 200 (application/json)
 
 
@@ -89,7 +130,7 @@ how many clients?)
               "eth": false
             }
         }
-        
+
 + Response 200 (application/json)
 
 ## WAN Configuration [/api/network/wan]
@@ -132,7 +173,7 @@ how many clients?)
               }
             }
         }
-        
+
 + Response 200 (application/json)
 
 ## SSH Configuration [/api/network/ssh]
@@ -170,7 +211,7 @@ how many clients?)
               "port": 22
             }
         }
-        
+
 + Response 200 (application/json)
 
 
@@ -235,13 +276,13 @@ Specify whether a node is in the whitelist.
 + Request
 
         {
-            "is_trusted": true 
+            "is_trusted": true
         }
 
 + Request
 
-        { 
-            "is_trusted": false 
+        {
+            "is_trusted": false
         }
 
 + Response 200 (application/json)
@@ -270,14 +311,14 @@ Returns the details of all supported services and their status.
                 "url": "hoover.liquid.domain"
             }
         ]
-        
+
 ## Detail Supported Service [/api/services/{name}]
 
 ### Get details for supported service [GET]
 
 + Response 200 (application/json)
 
-        
+
         {
             "name": "hoover",
             "is_enabled": false,
@@ -291,7 +332,7 @@ Returns the details of all supported services and their status.
 ### Set the status of the specified service [PUT]
 Changes the status of the specified service.
 
-If a service status is changed to 'disabled', it will be immediately 
+If a service status is changed to 'disabled', it will be immediately
 disabled and will not start on subsequent boots.
 
 If a service status is changed to 'enabled', it will be immediately enabled
@@ -302,7 +343,7 @@ and will start on subsequent boots.
         {
             "is_enabled": true
         }
-        
+
 + Request 200 (application/json)
 
         {
@@ -319,7 +360,7 @@ If the user "Mike Tyson" is logged in:
 
 + Response 200 (application/json)
 
-        { 
+        {
             "is_authenticated": true,
             "username": "admin",
             "is_admin": true,
@@ -334,7 +375,7 @@ If the user "Mike Tyson" is logged in:
         {
             "is_authenticated": false
         }
-        
+
 ## List User [/api/users]
 
 ### List users [GET]
@@ -342,28 +383,28 @@ If the user "Mike Tyson" is logged in:
 + Response 200 (application/json)
 
         [
-            { 
+            {
                 "username": "admin",
                 "is_admin": true,
                 "first_name": "Mike",
                 "last_name": "Tyson",
                 "is_active": true
             },
-            { 
+            {
                 "username": "gigel",
                 "is_admin": false,
                 "first_name": "Gigel",
                 "last_name": "Ion",
                 "is_active": true
             },
-            { 
+            {
                 "username": "test",
                 "is_admin": false,
                 "first_name": "Test",
                 "last_name": "McTest",
                 "is_active": false
             },
-            { 
+            {
                 "username": "vest",
                 "is_admin": true,
                 "first_name": "West",
@@ -371,12 +412,12 @@ If the user "Mike Tyson" is logged in:
                 "is_active": false
             }
         ]
-        
+
 ### Create new user [POST]
 
 + Request
 
-        { 
+        {
             "username": "admin",
             "is_admin": true,
             "first_name": "Mike",
@@ -423,7 +464,7 @@ If the user "Mike Tyson" is logged in:
         {
             "is_active": true
         }
-        
+
 + Response 200 (application/json)
 
 
@@ -434,13 +475,13 @@ If the user "Mike Tyson" is logged in:
 
 If caller is admin, the `old_password` field is not needed.
 
-+ Request 
++ Request
 
         {
             "old_password": "mama nu are mere",
             "new_password": "mama are mere"
         }
-        
+
 + Response 200 (application/json)
 
 ## VPN [/api/vpn]
