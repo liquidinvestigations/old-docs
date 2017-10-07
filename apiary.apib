@@ -9,7 +9,53 @@ API allowing for Liquid Investigations system management
 
 ## Registration [/api/registration]
 
+### Get registration form defaults [GET]
+
+This GET will return the default data for the initial network configuration
+form. It will be allowed to happen only if the system has not been configured.
+
+Note the things you GET aren't validated, because some have to be blank fields.
+
++ Response 200 (application/json)
+
+        {
+            "username": "admin",
+            "password": "",
+            "domain": "liquidnode.liquid",
+            "lan": {
+                "ip": "10.0.0.1",
+                "netmask": "255.255.255.0",
+                "dhcp_range": "10.0.0.100-255",
+                "hotspot": {
+                    "ssid": "",
+                    "password": ""
+                },
+                "eth": false
+            },
+            "wan": {
+                "wifi": {
+                    "ssid": "",
+                    "password": ""
+                }
+            },
+            "ssh": {
+                "enabled": false,
+                "authorized_keys": [],
+                "port": 22
+            }
+        }
+
+If the system has been configured, then you will get this error:
+
++ Response 400 (application/json)
+
+        {
+            "detail": "Registration already done!"
+        }
+
 ### Send initial admin registration [POST]
+
+This POST will be allowed to happen only if the system has not been configured.
 
 Validation for these fields:
 
@@ -43,15 +89,15 @@ Validation for these fields:
                 "netmask": "255.255.255.0",
                 "dhcp_range": "10.0.0.100-255",
                 "hotspot": {
-                    "ssid": "",
-                    "password": ""
+                    "ssid": "123b456x",
+                    "password": "123b456x"
                 },
                 "eth": false
             },
             "wan": {
                 "wifi": {
-                    "ssid": "",
-                    "password": ""
+                    "ssid": "123b456x",
+                    "password": "123b456x"
                 }
             },
             "ssh": {
@@ -68,6 +114,7 @@ Validation for these fields:
 ## Status [/api/network/status]
 
 ### Get Network Status [GET]
+
 Returns a dictionary describing the current status of the network (connected? via which interfaces?
 how many clients?)
 
@@ -86,6 +133,8 @@ how many clients?)
 
 
 ### Update Network Domain [PUT]
+
+Validation: see `/api/registration`.
 
 + Request
 
@@ -115,6 +164,8 @@ how many clients?)
 
 
 ### Update Network LAN [PUT]
+
+Validation: see `/api/registration`.
 
 + Request
 
@@ -157,6 +208,8 @@ how many clients?)
 
 ### Update Network WAN [PUT]
 
+Validation: see `/api/registration`.
+
 + Request
 
         {
@@ -197,6 +250,8 @@ how many clients?)
 + Response 500 (application/json)
 
 ### Update Network SSH config [PUT]
+
+Validation: see `/api/registration`.
 
 + Request
 
@@ -356,6 +411,7 @@ and will start on subsequent boots.
 ## Current user data [/api/users/whoami]
 
 ### Find out what user is logged in [GET]
+
 If the user "Mike Tyson" is logged in:
 
 + Response 200 (application/json)
@@ -474,6 +530,8 @@ If the user "Mike Tyson" is logged in:
 ### Change User Password [POST]
 
 If caller is admin, the `old_password` field is not needed.
+
+Validation: min length 8 for both passwords.
 
 + Request
 
