@@ -7,7 +7,7 @@ API allowing for Liquid Investigations system management
 
 # Group Initial Device Setup
 
-## Registration [/api/registration]
+## Registration [/api/registration/]
 
 ### Get registration form defaults [GET]
 
@@ -109,7 +109,7 @@ Validation for these fields:
 
 # Group Network Management
 
-## Status [/api/network/status]
+## Status [/api/network/status/]
 
 ### Get Network Status [GET]
 
@@ -121,7 +121,7 @@ how many clients?)
         {}
 
 
-## Domain Configuration [/api/network/domain]
+## Domain Configuration [/api/network/domain/]
 
 ### Get Network Domain [GET]
 
@@ -132,7 +132,7 @@ how many clients?)
 
 ### Update Network Domain [PUT]
 
-Validation: see `/api/registration`.
+Validation: see `/api/registration/`.
 
 + Request
 
@@ -141,7 +141,7 @@ Validation: see `/api/registration`.
 + Response 200 (application/json)
 
 
-## LAN Configuration [/api/network/lan]
+## LAN Configuration [/api/network/lan/]
 
 ### Get Network LAN [GET]
 
@@ -163,7 +163,7 @@ Validation: see `/api/registration`.
 
 ### Update Network LAN [PUT]
 
-Validation: see `/api/registration`.
+Validation: see `/api/registration/`.
 
 + Request
 
@@ -182,7 +182,7 @@ Validation: see `/api/registration`.
 
 + Response 200 (application/json)
 
-## WAN Configuration [/api/network/wan]
+## WAN Configuration [/api/network/wan/]
 
 ### Get Network WAN [GET]
 
@@ -206,7 +206,7 @@ Validation: see `/api/registration`.
 
 ### Update Network WAN [PUT]
 
-Validation: see `/api/registration`.
+Validation: see `/api/registration/`.
 
 + Request
 
@@ -227,7 +227,7 @@ Validation: see `/api/registration`.
 
 + Response 200 (application/json)
 
-## SSH Configuration [/api/network/ssh]
+## SSH Configuration [/api/network/ssh/]
 
 ### Get Network SSH config [GET]
 
@@ -249,7 +249,7 @@ Validation: see `/api/registration`.
 
 ### Update Network SSH config [PUT]
 
-Validation: see `/api/registration`.
+Validation: see `/api/registration/`.
 
 + Request
 
@@ -271,7 +271,7 @@ Validation: see `/api/registration`.
 # Group Admin Panel
 
 
-## Discovered Nodes [/api/nodes]
+## Discovered Nodes [/api/nodes/]
 
 ### Get List of Discovered Nodes [GET]
 Returns the current list of discovered nodes.
@@ -303,7 +303,7 @@ Returns the current list of discovered nodes.
             }
         ]
 
-## Specific Discovered Node [/api/nodes/{id}]
+## Specific Discovered Node [/api/nodes/{id}/]
 
 ### Get specific node [GET]
 
@@ -321,7 +321,7 @@ Returns the current list of discovered nodes.
             }
         }
 
-## Specific Node Whitelist [/api/nodes/{id}/trusted]
+## Specific Node Whitelist [/api/nodes/{id}/trusted/]
 
 ### Mark a node as whitelisted/not whitelisted [PUT]
 Specify whether a node is in the whitelist.
@@ -341,7 +341,7 @@ Specify whether a node is in the whitelist.
 + Response 200 (application/json)
 
 
-## List Supported Services [/api/services]
+## List Supported Services [/api/services/]
 
 ### Get list of supported services [GET]
 Returns the details of all supported services and their status.
@@ -365,7 +365,7 @@ Returns the details of all supported services and their status.
             }
         ]
 
-## Detail Supported Service [/api/services/{name}]
+## Detail Supported Service [/api/services/{name}/]
 
 ### Get details for supported service [GET]
 
@@ -380,7 +380,7 @@ Returns the details of all supported services and their status.
             "url": "hoover.liquid.domain"
         }
 
-## Enable Specific Service [/api/services/{name}/enabled]
+## Enable Specific Service [/api/services/{name}/enabled/]
 
 ### Set the status of the specified service [PUT]
 Changes the status of the specified service.
@@ -406,7 +406,7 @@ and will start on subsequent boots.
 
 + Response 200 (application/json)
 
-## Current user data [/api/users/whoami]
+## Current user data [/api/users/whoami/]
 
 ### Find out what user is logged in [GET]
 
@@ -430,7 +430,7 @@ If the user "Mike Tyson" is logged in:
             "is_authenticated": false
         }
 
-## List User [/api/users]
+## List User [/api/users/]
 
 ### List users [GET]
 
@@ -481,7 +481,7 @@ If the user "Mike Tyson" is logged in:
 
 + Response 200
 
-## Specific User [/api/users/{username}]
+## Specific User [/api/users/{username}/]
 
 ### Get Specific User [GET]
 
@@ -509,7 +509,7 @@ If the user "Mike Tyson" is logged in:
 
 + Response 200
 
-## Specific User Set Active [/api/users/{username}/active]
+## Specific User Set Active [/api/users/{username}/active/]
 
 ### Set user as active [PUT]
 
@@ -523,7 +523,7 @@ If the user "Mike Tyson" is logged in:
 
 
 
-## Change Password for Specific User [/api/users/{username}/password]
+## Change Password for Specific User [/api/users/{username}/password/]
 
 ### Change User Password [POST]
 
@@ -540,5 +540,5 @@ Validation: min length 8 for both passwords.
 
 + Response 200 (application/json)
 
-## VPN [/api/vpn]
+## VPN [/api/vpn/]
 WIP - need to clearly
