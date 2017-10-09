@@ -118,7 +118,8 @@ how many clients?)
 
 + Response 200 (application/json)
 
-        {}
+        {
+        }
 
 
 ## Domain Configuration [/api/network/domain/]
@@ -127,7 +128,9 @@ how many clients?)
 
 + Response 200 (application/json)
 
-        {"domain": "liquid.local"}
+        {
+            "domain": "liquid.local"
+        }
 
 
 ### Update Network Domain [PUT]
@@ -136,7 +139,9 @@ Validation: see `/api/registration/`.
 
 + Request
 
-        {"domain": "liquid.local"}
+        {
+            "domain": "liquid.local"
+        }
 
 + Response 200 (application/json)
 
@@ -148,18 +153,15 @@ Validation: see `/api/registration/`.
 + Response 200 (application/json)
 
         {
-            "lan": {
-              "ip": "10.0.0.1",
-              "netmask": "255.255.255.0",
-              "dhcp_range": "10.0.0.100-255",
-              "hotspot": {
-                "ssid": "foo",
-                "password": "bar"
-              },
-              "eth": false
-            }
+          "ip": "10.0.0.1",
+          "netmask": "255.255.255.0",
+          "dhcp_range": "10.0.0.100-255",
+          "hotspot": {
+            "ssid": "foo",
+            "password": "bar"
+          },
+          "eth": false
         }
-
 
 ### Update Network LAN [PUT]
 
@@ -168,16 +170,14 @@ Validation: see `/api/registration/`.
 + Request
 
         {
-            "lan": {
-              "ip": "10.0.0.1",
-              "netmask": "255.255.255.0",
-              "dhcp_range": "10.0.0.100-255",
-              "hotspot": {
-                "ssid": "foo",
-                "password": "bar"
-              },
-              "eth": false
-            }
+          "ip": "10.0.0.1",
+          "netmask": "255.255.255.0",
+          "dhcp_range": "10.0.0.100-255",
+          "hotspot": {
+            "ssid": "foo",
+            "password": "bar"
+          },
+          "eth": false
         }
 
 + Response 200 (application/json)
@@ -189,20 +189,17 @@ Validation: see `/api/registration/`.
 + Response 200 (application/json)
 
         {
-            "wan": {
-              "static": {
-                "ip": "192.168.66.66",
-                "netmask": "255.255.255.0",
-                "gateway": "192.168.66.1",
-                "dns_server": "192.168.66.1"
-              },
-              "wifi": {
-                "ssid": "network",
-                "password": "password"
-              }
-            }
+          "static": {
+            "ip": "192.168.66.66",
+            "netmask": "255.255.255.0",
+            "gateway": "192.168.66.1",
+            "dns_server": "192.168.66.1"
+          },
+          "wifi": {
+            "ssid": "network",
+            "password": "password"
+          }
         }
-
 
 ### Update Network WAN [PUT]
 
@@ -211,18 +208,16 @@ Validation: see `/api/registration/`.
 + Request
 
         {
-            "wan": {
-              "static": {
-                "ip": "192.168.66.66",
-                "netmask": "255.255.255.0",
-                "gateway": "192.168.66.1",
-                "dns_server": "192.168.66.1"
-              },
-              "wifi": {
-                "ssid": "network",
-                "password": "password"
-              }
-            }
+          "static": {
+            "ip": "192.168.66.66",
+            "netmask": "255.255.255.0",
+            "gateway": "192.168.66.1",
+            "dns_server": "192.168.66.1"
+          },
+          "wifi": {
+            "ssid": "network",
+            "password": "password"
+          }
         }
 
 + Response 200 (application/json)
@@ -234,15 +229,13 @@ Validation: see `/api/registration/`.
 + Response 200 (application/json)
 
         {
-            "ssh": {
-              "enabled": true,
-              "authorized_keys": [
-                {"key": "key 1"},
-                {"key": "key 2"},
-                {"key": "key 3"}
-              ],
-              "port": 22
-            }
+          "enabled": true,
+          "authorized_keys": [
+            {"key": "key 1"},
+            {"key": "key 2"},
+            {"key": "key 3"}
+          ],
+          "port": 22
         }
 
 + Response 500 (application/json)
@@ -254,15 +247,13 @@ Validation: see `/api/registration/`.
 + Request
 
         {
-            "ssh": {
-              "enabled": true,
-              "authorized_keys": [
-                {"key": "key 1"},
-                {"key": "key 2"},
-                {"key": "key 3"}
-              ],
-              "port": 22
-            }
+          "enabled": true,
+          "authorized_keys": [
+            {"key": "key 1"},
+            {"key": "key 2"},
+            {"key": "key 3"}
+          ],
+          "port": 22
         }
 
 + Response 200 (application/json)
@@ -370,7 +361,6 @@ Returns the details of all supported services and their status.
 ### Get details for supported service [GET]
 
 + Response 200 (application/json)
-
 
         {
             "name": "hoover",
@@ -487,7 +477,6 @@ If the user "Mike Tyson" is logged in:
 
 + Response 200
 
-
         {
             "username": "admin",
             "is_admin": true,
@@ -520,7 +509,6 @@ If the user "Mike Tyson" is logged in:
         }
 
 + Response 200 (application/json)
-
 
 
 ## Change Password for Specific User [/api/users/{username}/password/]
