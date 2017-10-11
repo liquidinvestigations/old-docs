@@ -57,9 +57,9 @@ This POST will be allowed to happen only if the system has not been configured.
 
 Validation for these fields:
 
-- `username`: max length 64, min length 3, regex `^(\w|\.)+$`
+- `username`: max length 64, min length 3, regex `^([a-zA-Z0-9_]|\.)+$`
 - `pasword`: min length 8
-- `domain`: regex `^((\w|-)+\.)+(\w+)$`
+- `domain`: regex `^(([a-zA-Z0-9_]|-)+\.)+([a-zA-Z0-9_]+)$`
 - `ipv4 fields`: validate using some library. These are the following:
     - `lan.ip`
     - `lan.netmask`
