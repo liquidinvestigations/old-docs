@@ -24,12 +24,16 @@ Minimal Odroid C2 shopping list:
 * Compatible WiFi adapter (e.g. Asus USB-N14)
 
 ### Installing from a bootable image
-Go to http://jenkins.liquiddemo.org/ and download the file
-`liquid-odroid_c2-arm64-raw.img.xz`. Then write the image to an SD card, plug
-it into an Odroid C2, and plug it in. Wait 2 minutes for the system to boot. If
-there is a compatible WiFi adapter plugged in, the node will create a hotspot
-named `Liquid-xxxx` (ending with a random word), and the password is
+Download the [latest Odroid C2 image][latest-c2] and write it to an SD card.
+You can use [etcher][] to write the image. Plug the card into an Odroid C2,
+power it up, and wait 2 minutes for the system to boot. If there is a
+[compatible WiFi adapter][wifi-adapters] plugged in, the node will create a
+hotspot named `Liquid-xxxx` (ending with a random word), and the password is
 `investigations`.
+
+[latest-c2]: https://jenkins.liquiddemo.org/job/setup-arm64/job/master/lastSuccessfulBuild/artifact/liquid-odroid_c2-arm64-raw.img.xz
+[etcher]: https://etcher.io
+[wifi-adapters]: WiFi-Adapters.md
 
 ### Installing on existing system
 This advanced mode of installation assumes you have a running Ubuntu Xenial
@@ -65,7 +69,7 @@ From the admin site, you can change the following:
 * *WAN* – the node's connection to the Internet. By default, the Ethernet port
   should be plugged into a router, and it will obtain configuration via DHCP
   from the router. You can specify a static configuration if needed. With a 2nd
-  WiFi adapter, you can configure the node to connect to an existing WiFi
+  [WiFi adapter][], you can configure the node to connect to an existing WiFi
   network, instead of plugging in the Ethernet port.
 
 * *LAN* – hotspot configuration. You can set the hotspot's network name and
@@ -75,6 +79,10 @@ From the admin site, you can change the following:
   delete accounts, but you can deactivate them.
 
 * *Applications* – enable or disable applications bundled in the distribution.
+
+* *SSH access* – configure SSH server, install user login keys.
+
+[WiFi adapter]: WiFi-Adapters.md
 
 
 ## Working with documents
