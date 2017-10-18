@@ -103,3 +103,19 @@ documents.
 After finding a document in _Hoover_, you can select text, and click on the
 button that appears next to the selection. Alternatively, click the
 _Hypothesis_ sidebar on the right side of the page, to see all annotations.
+
+
+## Collaboration tools
+Working in a team requires communication and coordination. The Liquid
+distribution comes with a chat app – _Matrix_ – and a wiki – _DokuWiki_. Users
+can share notes and exchange messages in a private and secure environment.
+
+### Chat – matrix.org
+Go to the homepage and click on _Matrix_. Log in with your credentials on the
+liquid node. Here you can create and join chat rooms, and start private
+conversations.
+
+### Wiki - DokuWiki
+Go to the homepage and click on _DokuWiki_. Log in with your credentials on the
+liquid node. Go to _sitemap_ (upper right) to see a list of all wiki pages. See
+DokuWiki's manual for details on creating pages and the wiki syntax.
