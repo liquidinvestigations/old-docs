@@ -1,4 +1,12 @@
 # Liquid Investigations software distribution
+The Liquid Investigations distribution is a collection of software tools,
+bundled together and preconfigured, to support collaborative investigation
+work. It provides several apps: file upload and sharing, search in uploaded
+files, annotations, chat, and a shared wiki.
+
+The distribution runs on a Linux server, called a _node_, which can be a
+regular PC, an ARM board (e.g. Odroid C2), or a cloud server / VPS. The node
+has a user database which is shared across the bundled apps.
 
 
 ## Setting up a Liquid node
