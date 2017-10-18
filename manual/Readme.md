@@ -67,3 +67,31 @@ From the admin site, you can change the following:
   delete accounts, but you can deactivate them.
 
 * *Applications* – enable or disable applications bundled in the distribution.
+
+
+## Working with documents
+With Liquid Investigations, you can upload documents, search them with the
+[Hoover][] search engine, and make annotations using [Hypothesis][]. All users
+in the system will be able to see each other's uploaded documents and
+annotations.
+
+[Hoover]: https://hoover.github.io
+[Hypothesis]: https://hypothes.is
+
+### Upload and sharing - Davros
+Go to the file upload application, by opening the home page, and clicking on
+_Davros_. Upload files by drag and drop. Click on files and folders to browse
+and download.
+
+Any files uploaded will be automatically indexed by Hoover. It may take up to
+30 seconds for Hoover to notice the new files.
+
+### Search - Hoover
+Go to the homepage and click on _Hoover_. Files uploaded in _Davros_ show up in
+the named "Davros-Sync" collection. Enter a search query to find matching
+documents.
+
+### Annotations - Hypothesis
+After finding a document in _Hoover_, you can select text, and click on the
+button that appears next to the selection. Alternatively, click the
+_Hypothesis_ sidebar on the right side of the page, to see all annotations.
