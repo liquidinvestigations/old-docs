@@ -39,3 +39,31 @@ connection.
     ```shell
     sudo /opt/setup/bin/install
     ```
+
+### Configuration
+To change the default hotspot name/password, domain name, admin credentials,
+and to configure applications, go to the node's home page. By default this
+is http://fresh.liquid.local. Be sure to connect to the node's hotspot before
+accessing the home page. Log in using the default credentials (username
+`liquid`, password `investigations`) and click on `[admin]`.
+
+From the admin site, you can change the following:
+
+* *Domain name* – this determines the URLs of the liquid node's websites. It
+  should either be a subdomain of your organization (so, if the organization is
+  `example.com`, it can be `colombo.liquid.example.com`) or a private name
+  (e.g. `colombo.liquid.local`).
+
+* *WAN* – the node's connection to the Internet. By default, the Ethernet port
+  should be plugged into a router, and it will obtain configuration via DHCP
+  from the router. You can specify a static configuration if needed. With a 2nd
+  WiFi adapter, you can configure the node to connect to an existing WiFi
+  network, instead of plugging in the Ethernet port.
+
+* *LAN* – hotspot configuration. You can set the hotspot's network name and
+  password. You can also change what IP addresses are given to clients.
+
+* *User accounts* – create and change user accounts. It's not possible to
+  delete accounts, but you can deactivate them.
+
+* *Applications* – enable or disable applications bundled in the distribution.
