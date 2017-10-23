@@ -277,8 +277,8 @@ Returns the current list of discovered nodes.
                 "data": {
                     "address": "102.168.0.222",
                     "discovery_interface": "interface_name",
-                    "last_seen_at": "date in ISO fmt",
-                    "discovered_at": "date in ISO fmt"
+                    "last_seen_at": "2017-10-23T12:21:19Z",
+                    "discovered_at": "2017-10-23T12:21:19Z"
                 }
             },
             {
@@ -288,8 +288,8 @@ Returns the current list of discovered nodes.
                 "data": {
                     "address": "102.168.0.111",
                     "discovery_interface": "interface_name",
-                    "last_seen_at": "date in ISO fmt",
-                    "discovered_at": "date in ISO fmt"
+                    "last_seen_at": "2017-10-23T12:21:19Z",
+                    "discovered_at": "2017-10-23T12:21:19Z"
                 }
             }
         ]
@@ -307,8 +307,8 @@ Returns the current list of discovered nodes.
             "data": {
                 "address": "102.168.0.222",
                 "discovery_interface": "interface_name",
-                "last_seen_at": "date in ISO fmt",
-                "discovered_at": "date in ISO fmt"
+                "last_seen_at": "2017-10-23T12:21:19Z",
+                "discovered_at": "2017-10-23T12:21:19Z"
             }
         }
 
@@ -532,5 +532,284 @@ Validation: min length 8 for both passwords.
 
 + Response 200 (application/json)
 
-## VPN [/api/vpn/]
-WIP - need to clearly
+# Group VPN
+
+## Status [/api/vpn/]
+
+### Get Status [GET]
+
+Gets the current status of the VPN configuration.
+
++ Response 200 (application/json)
+
+        {
+            "server": {
+                "state_description": "Up and running.",
+                "is_enabled": true,
+                "is_running": true,
+                "registered_key_count": 5,
+                "active_connection_count": 3,
+                "error_message": null
+            },
+            "client": {
+                "state_description": "Not configured.",
+                "is_enabled": false,
+                "is_running": false,
+                "error_message": null
+            }
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "server": {
+                "state_description": "Server is starting...",
+                "is_enabled": true,
+                "is_running": false,
+                "registered_key_count": 0,
+                "active_connection_count": 0,
+                "error_message": null
+            },
+            "client": {
+                "state_description": "Up and running.",
+                "is_enabled": true,
+                "is_running": true,
+                "error_message": null
+            }
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "server": {
+                "state_description": "Error",
+                "is_enabled": true,
+                "is_running": false,
+                "registered_key_count": 0,
+                "active_connection_count": 0,
+                "error_message": "Can't do something"
+            },
+            "client": {
+                "state_description": "Error",
+                "is_enabled": true,
+                "is_running": false,
+                "error_message": "Can't do anything about it"
+            }
+        }
+
+
+## VPN Server Enable [/api/vpn/server/]
+
+### Set Server Enable [POST]
+
++ Request (application/json)
+
+        {
+            "is_enabled": true
+        }
+
++ Response 200 (application/json)
+
+        {
+            "detail": "This will talke a while, wait a minute for the server to be up"
+        }
+
++ Request (application/json)
+
+        {
+            "is_enabled": false
+        }
+
++ Response 200 (application/json)
+
+        {
+            "detail": "Okay, we disabled it"
+        }
+
++ Request (application/json)
+
+        {
+            "is_enabled": true
+        }
+
++ Response 500 (application/json)
+
+        {
+            "detail": "Something really bad happened"
+        }
+
+
+## VPN Client Enable [/api/vpn/client/]
+
+### Set Client Enable [POST]
+
++ Request (application/json)
+
+        {
+            "is_enabled": false
+        }
+
++ Response 200 (application/json)
+
+        {
+            "detail": "Okay, we disabled it"
+        }
+
++ Request (application/json)
+
+        {
+            "is_enabled": true
+        }
+
++ Response 500 (application/json)
+
+        {
+            "detail": "Something really bad happened whily trying to enable the client"
+        }
+
+
+## VPN Server Key List [/api/vpn/server/keys/]
+
+### List Server Keys [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "label": "Cheia lui Popescu",
+                "revoked": false
+            },
+            {
+                "id": 2,
+                "label": "Cheia fratelui lui Popescu",
+                "revoked": false
+            },
+            {
+                "id": 3,
+                "label": "Fosta cheie lui Popescu",
+                "revoked": true,
+                "revoked_reason": "I have another one",
+                "revoked_at": "2017-10-23T12:21:19Z",
+                "revoked_by": "popescu"
+            },
+            {
+                "id": 5,
+                "label": "Cheia fostei lui Popescu",
+                "revoked": true,
+                "revoked_reason": "I have another one",
+                "revoked_at": "2017-10-23T12:21:19Z",
+                "revoked_by": "popescu"
+            }
+        ]
+
+
+## VPN Server Key List [/api/vpn/server/keys/generate/]
+
+### Generate another key [POST]
+
++ Request (application/json)
+
+        {
+            "label": "another key please"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 15,
+            "label": "another key please",
+            "revoked": false
+        }
+
++ Request (application/json)
+
+        {
+            "label": "yet another key please"
+        }
+
++ Response 500 (application/json)
+
+        {
+            "detail": "Couldn't do it, sorry"
+        }
+
+
+## VPN Server Key Specific Item [/api/vpn/server/keys/{id}/]
+
+### Get Server Key Details [GET]
+
++ Response 200 (application/json)
+
+        {
+            "id": 3,
+            "label": "Fosta cheie lui Popescu",
+            "revoked": true,
+            "revoked_reason": "I have another one",
+            "revoked_at": "2017-10-23T12:21:19Z",
+            "revoked_by": "popescu"
+        }
+
+
+## VPN Server Download Key [/api/vpn/server/keys/{id}/download/]
+
+### Download key ovpn file [GET]
+
++ Response 200 (application/x-openvpn-profile)
+
+        BINARY FILE HERE
+
+
+## VPN Server Revoke Key [/api/vpn/server/keys/{id}/revoke/]
+
+### Revoke specific key [POST]
+
++ Request (application/json)
+
+        {
+            "revoked_reason": "I don't like what's happening with this key"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "detail": "Client key revoked. It can never be brought back."
+        }
+
+
+## VPN Client Upload Configuration file [/api/vpn/client/upload/]
+
+Allows the user to upload a new configuration file.
+If they upload another key,
+
+### Upload New Configuration [POST]
+
++ Request (application/x-openvpn-profile)
+
+        BINARY FILE HERE
+
++ Response 200 (application/json)
+
+        {
+            "detail": "Upload done."
+        }
+
++ Request (application/x-openvpn-profile)
+
+        INVALID BINARY FILE HERE
+
++ Response 400 (application/json)
+
+        {
+            "detail": "That OVPN configuration file is not valid."
+        }
+
++ Request (application/x-openvpn-profile)
+
+        WEIRD BINARY FILE HERE
+
++ Response 500 (application/json)
+
+        {
+            "detail": "Something really bad happened."
+        }
