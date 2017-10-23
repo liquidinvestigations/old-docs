@@ -76,7 +76,7 @@ Validation for these fields:
 - `ssh.port`: int, min 1, max 65535
 
 
-+ Request
++ Request (application/json)
 
         {
             "username": "johnDoe",
@@ -137,7 +137,7 @@ how many clients?)
 
 Validation: see `/api/registration/`.
 
-+ Request
++ Request (application/json)
 
         {
             "domain": "liquid.local"
@@ -167,7 +167,7 @@ Validation: see `/api/registration/`.
 
 Validation: see `/api/registration/`.
 
-+ Request
++ Request (application/json)
 
         {
           "ip": "10.0.0.1",
@@ -205,7 +205,7 @@ Validation: see `/api/registration/`.
 
 Validation: see `/api/registration/`.
 
-+ Request
++ Request (application/json)
 
         {
           "static": {
@@ -244,7 +244,7 @@ Validation: see `/api/registration/`.
 
 Validation: see `/api/registration/`.
 
-+ Request
++ Request (application/json)
 
         {
           "enabled": true,
@@ -317,13 +317,15 @@ Returns the current list of discovered nodes.
 ### Mark a node as whitelisted/not whitelisted [PUT]
 Specify whether a node is in the whitelist.
 
-+ Request
++ Request (application/json)
 
         {
             "is_trusted": true
         }
 
-+ Request
++ Response 200 (application/json)
+
++ Request (application/json)
 
         {
             "is_trusted": false
@@ -339,24 +341,51 @@ Returns the details of all supported services and their status.
 
 + Response 200 (application/json)
 
-        [{"name":"hoover","url":"http://hoover.liquiddemo.org","is_enabled":true,"state":"","state_description":"","error_message":""},{"name":"hypothesis","url":"http://hypothesis.liquiddemo.org","is_enabled":true,"state":"","state_description":"","error_message":""},{"name":"matrix","url":"http://matrix.liquiddemo.org","is_enabled":true,"state":"","state_description":"","error_message":""},{"name":"dokuwiki","url":"http://dokuwiki.liquiddemo.org","is_enabled":true,"state":"","state_description":"","error_message":""},{"name":"davros","url":"http://davros.liquiddemo.org","is_enabled":true,"state":"","state_description":"","error_message":""}]
-
-+ Response 200 (application/json)
-
         [
             {
-                "name": "hypothesis",
+                "name": "hoover",
+                "description": "Search Tool",
+                "url": "http://hoover.liquiddemo.org",
                 "is_enabled": true,
-                "state_description": "starting",
-                "error_message": null,
-                "url": "hypothesis.liquid.domain"
+                "state": "running",
+                "state_description": "Up and running",
+                "error_message": null
             },
             {
-                "name": "hoover",
-                "is_enabled": false,
-                "state_description": "error",
-                "error_message": "Hoover crashed",
-                "url": "hoover.liquid.domain"
+                "name": "hypothesis",
+                "description": "Annotations",
+                "url": "http://hypothesis.liquiddemo.org",
+                "is_enabled": true,
+                "state": "starting",
+                "state_description": "Waiting for it to be up...",
+                "error_message": ""
+            },
+            {
+                "name": "matrix",
+                "description": "Chat Server",
+                "url": "http://matrix.liquiddemo.org",
+                "is_enabled": true,
+                "state": "disabled",
+                "state_description": "Disabled",
+                "error_message": ""
+            },
+            {
+                "name": "dokuwiki",
+                "description": "Wiki Pages",
+                "url": "http://dokuwiki.liquiddemo.org",
+                "is_enabled": true,
+                "state": "disabled",
+                "state_description": "Disabled",
+                "error_message": null
+            },
+            {
+                "name": "davros",
+                "description": "File Upload",
+                "url": "http://davros.liquiddemo.org",
+                "is_enabled": true,
+                "state": "error",
+                "state_description": "Error",
+                "error_message": "does not work"
             }
         ]
 
@@ -368,10 +397,11 @@ Returns the details of all supported services and their status.
 
         {
             "name": "hoover",
+            "description": "Search Tool",
             "is_enabled": false,
             "state_description": "error",
             "error_message": null,
-            "url": "hoover.liquid.domain"
+            "url": "http://hoover.liquid.domain"
         }
 
 ## Enable Specific Service [/api/services/{name}/enabled/]
@@ -385,18 +415,19 @@ disabled and will not start on subsequent boots.
 If a service status is changed to 'enabled', it will be immediately enabled
 and will start on subsequent boots.
 
-+ Request 200 (application/json)
++ Request (application/json)
 
         {
             "is_enabled": true
         }
+        
++ Response 200 (application/json)
 
-+ Request 200 (application/json)
++ Request (application/json)
 
         {
             "is_enabled": false
         }
-
 
 + Response 200 (application/json)
 
@@ -463,7 +494,7 @@ If the user "Mike Tyson" is logged in:
 
 ### Create new user [POST]
 
-+ Request
++ Request (application/json)
 
         {
             "username": "admin",
@@ -491,7 +522,7 @@ If the user "Mike Tyson" is logged in:
 
 ### Edit User [PUT]
 
-+ Request 200 (application/json)
++ Request (application/json)
 
         {
             "is_admin": true,
@@ -506,7 +537,7 @@ If the user "Mike Tyson" is logged in:
 
 ### Set user as active [PUT]
 
-+ Request 200 (application/json)
++ Request (application/json)
 
         {
             "is_active": true
@@ -523,7 +554,7 @@ If caller is admin, the `old_password` field is not needed.
 
 Validation: min length 8 for both passwords.
 
-+ Request
++ Request (application/json)
 
         {
             "old_password": "mama nu are mere",
