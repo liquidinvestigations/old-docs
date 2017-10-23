@@ -119,6 +119,31 @@ how many clients?)
 + Response 200 (application/json)
 
         {
+            "interfaces": [
+                {
+                    "name": "eth0",
+                    "label": "Ethernet",
+                    "is_up": true,
+                    "ip_address": "192.168.22.22",
+                    "error_message": null
+                },
+                {
+                    "name": "wlan0",
+                    "label": "Hotspot",
+                    "is_up": true,
+                    "ip_address": "192.168.22.22",
+                    "ssid": "Liquid Network no. 2",
+                    "error_message": null
+                },
+                {
+                    "name": "wlan1",
+                    "label": "WiFi Client",
+                    "is_up": false,
+                    "ip_address": null,
+                    "ssid": null,
+                    "error_message": "SSID 'SOME NETWORK' not found"
+                }
+            ]
         }
 
 
