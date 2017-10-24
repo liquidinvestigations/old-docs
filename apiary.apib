@@ -170,6 +170,19 @@ Validation: see `/api/registration/`.
 
 + Response 200 (application/json)
 
++ Request (application/json)
+
+        {
+            "domain": "invalid?domain.com"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "domain": [
+                "invalid hostname"
+            ]
+        }
 
 ## LAN Configuration [/api/network/lan/]
 
@@ -206,6 +219,41 @@ Validation: see `/api/registration/`.
         }
 
 + Response 200 (application/json)
+
++ Request (application/json)
+
+        {
+            "ip": "1000.0.0.1000",
+            "netmask": "2550.255.255.0",
+            "dhcp_range": null,
+            "hotspot": {
+                "ssid": "x",
+                "password": "x"
+            },
+            "eth": "why?"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "ip": [
+                "Enter a valid IPv4 address."
+            ],
+            "netmask": [
+                "Enter a valid IPv4 address."
+            ],
+            "dhcp_range": [
+                "This field may not be null."
+            ],
+            "hotspot": {
+                "password": [
+                    "Ensure this field has at least 8 characters."
+                ]
+            },
+            "eth": [
+                "\"why?\" is not a valid boolean."
+            ]
+        }
 
 ## WAN Configuration [/api/network/wan/]
 
@@ -247,6 +295,25 @@ Validation: see `/api/registration/`.
 
 + Response 200 (application/json)
 
++ Request (application/json)
+
+        {
+            "wifi": {
+                "ssid": "what a short",
+                "password": "pass"
+            }
+        }
+
++ Response 400 (application/json)
+
+        {
+            "wifi": {
+                "password": [
+                    "Ensure this field has at least 8 characters."
+                ]
+            }
+        }
+
 ## SSH Configuration [/api/network/ssh/]
 
 ### Get Network SSH config [GET]
@@ -262,8 +329,6 @@ Validation: see `/api/registration/`.
           ],
           "port": 22
         }
-
-+ Response 500 (application/json)
 
 ### Update Network SSH config [PUT]
 
@@ -283,6 +348,28 @@ Validation: see `/api/registration/`.
 
 + Response 200 (application/json)
 
++ Request (application/json)
+
+        {
+            "enabled": false,
+            "authorized_keys": [{"key": ""}],
+            "port": 0
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "port": [
+                "Ensure this value is greater than or equal to 1."
+            ],
+            "authorized_keys": [
+                {
+                    "key": [
+                        "This field may not be blank."
+                    ]
+                }
+            ]
+        }
 
 # Group Admin Panel
 
@@ -451,6 +538,18 @@ and will start on subsequent boots.
 + Request (application/json)
 
         {
+            "is_enabled": true
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "detail": "For some reason, that service cannot be enabled."
+        }
+
++ Request (application/json)
+
+        {
             "is_enabled": false
         }
 
@@ -531,6 +630,24 @@ If the user "Mike Tyson" is logged in:
 
 + Response 200
 
++ Request (application/json)
+
+        {
+            "username": "",
+            "first_name": "",
+            "last_name": "",
+            "is_admin": false,
+            "is_active": false
+        }
+
++ Response 400 (application/json)
+
+        {
+            "username": [
+                "This field may not be blank."
+            ]
+        }
+
 ## Specific User [/api/users/{username}/]
 
 ### Get Specific User [GET]
@@ -550,6 +667,7 @@ If the user "Mike Tyson" is logged in:
 + Request (application/json)
 
         {
+            "username": "admin",
             "is_admin": true,
             "first_name": "Mike",
             "last_name": "Tyson",
@@ -557,6 +675,23 @@ If the user "Mike Tyson" is logged in:
         }
 
 + Response 200
+
++ Request (application/json)
+
+        {
+            "first_name": "Mike"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "username": [
+                "This field is required."
+            ],
+            "is_admin": [
+                "This field is required."
+            ]
+        }
 
 ## Specific User Set Active [/api/users/{username}/active/]
 
