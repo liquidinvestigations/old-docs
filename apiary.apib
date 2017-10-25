@@ -791,7 +791,7 @@ Gets the current status of the VPN configuration.
 
 ## VPN Server Enable [/api/vpn/server/]
 
-### Set Server Enable [POST]
+### Set Server Enable [PUT]
 
 + Request (application/json)
 
@@ -799,11 +799,7 @@ Gets the current status of the VPN configuration.
             "is_enabled": true
         }
 
-+ Response 200 (application/json)
-
-        {
-            "detail": "This will talke a while, wait a minute for the server to be up"
-        }
++ Response 200
 
 + Request (application/json)
 
@@ -811,11 +807,7 @@ Gets the current status of the VPN configuration.
             "is_enabled": false
         }
 
-+ Response 200 (application/json)
-
-        {
-            "detail": "Okay, we disabled it"
-        }
++ Response 200
 
 + Request (application/json)
 
@@ -832,7 +824,7 @@ Gets the current status of the VPN configuration.
 
 ## VPN Client Enable [/api/vpn/client/]
 
-### Set Client Enable [POST]
+### Set Client Enable [PUT]
 
 + Request (application/json)
 
@@ -840,11 +832,7 @@ Gets the current status of the VPN configuration.
             "is_enabled": false
         }
 
-+ Response 200 (application/json)
-
-        {
-            "detail": "Okay, we disabled it"
-        }
++ Response 200
 
 + Request (application/json)
 
