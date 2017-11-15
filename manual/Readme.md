@@ -33,7 +33,7 @@ hotspot named `Liquid-xxxx` (ending with a random word), and the password is
 
 [latest-c2]: https://jenkins.liquiddemo.org/job/setup-arm64/job/master/lastSuccessfulBuild/artifact/liquid-odroid_c2-arm64-raw.img.xz
 [etcher]: https://etcher.io
-[wifi-adapters]: WiFi-Adapters.md
+[wifi-adapters]: Hardware.md
 
 ### Installing on existing system
 This advanced mode of installation assumes you have a running Ubuntu Xenial
