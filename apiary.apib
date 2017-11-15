@@ -992,3 +992,22 @@ If they upload another key,
         {
             "detail": "Something really bad happened."
         }
+
+## Configuration status [/config/status/]
+
+Allows the user to upload a new configuration file.
+If they upload another key,
+
+### Get status [GET]
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "status": "configuring"
+        }
