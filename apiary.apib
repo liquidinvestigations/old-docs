@@ -723,6 +723,30 @@ Validation: min length 8 for both passwords.
 
 + Response 200 (application/json)
 
+
+## Configuration status [/api/configure/status/]
+
+### Get status [GET]
+
++ Response 200 (application/json)
+
+        {
+            "status": "ok"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "status": "configuring"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "status": "broken"
+        }
+
+
 # Group VPN
 
 ## Status [/api/vpn/]
@@ -959,7 +983,7 @@ Gets the current status of the VPN configuration.
 ## VPN Client Upload Configuration file [/api/vpn/client/upload/]
 
 Allows the user to upload a new configuration file.
-If they upload another key,
+If they upload another key, this one will be overwritten.
 
 ### Upload New Configuration [POST]
 
@@ -991,29 +1015,4 @@ If they upload another key,
 
         {
             "detail": "Something really bad happened."
-        }
-
-## Configuration status [/config/status/]
-
-Allows the user to upload a new configuration file.
-If they upload another key,
-
-### Get status [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "status": "ok"
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "status": "configuring"
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "status": "broken"
         }
