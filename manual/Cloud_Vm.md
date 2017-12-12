@@ -5,7 +5,7 @@
 
 Download the [latest cloud image][]:
 
-[latest cloud image]: https://jenkins.liquiddemo.org/job/liquidinvestigations/job/setup/job/master/lastSuccessfulBuild/artifact/liquid-cloud-x86_64-raw.img.xz
+[latest cloud image]: https://jenkins.liquiddemo.org/job/liquidinvestigations/job/setup/job/master/lastSuccessfulBuild/artifact/liquid-cloud-x86_64-raw.img.gz
 
 ```shell
 wget https://jenkins.liquiddemo.org/job/liquidinvestigations/job/setup/job/master/lastSuccessfulBuild/artifact/liquid-cloud-x86_64-raw.img.xz
