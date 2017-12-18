@@ -374,6 +374,26 @@ Validation: see `/api/registration/`.
 # Group Admin Panel
 
 
+## General Status [/api/status/]
+
+### Get general system status
+
++ Response 200 (application/json)
+
+        {
+            "messages": [
+                {
+                    "title": "Uptime",
+                    "text": "14:47:18 up  1:33,  3 users,  load average: 0,66, 0,65, 0,65"
+                },
+                {
+                    "title": "Disk usage",
+                    "text": "82GB free, 123G total"
+                }
+            ]
+        }
+
+
 ## Discovered Nodes [/api/nodes/]
 
 ### Get List of Discovered Nodes [GET]
