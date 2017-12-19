@@ -794,6 +794,35 @@ Validation: min length 8 for both passwords.
             "detail": "Something really bad happened, delete everything and start over."
         }
 
+## Shutdown [/api/shutdown/]
+
+### Poweroff or reboot [POST]
+
++ Request (application/json)
+
+        {
+            "action": "poweroff"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "detail": "System is powering off."
+        }
+
++ Request (application/json)
+
+        {
+            "action": "reboot"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "detail": "System is restarting."
+        }
+
+
 # Group VPN
 
 ## Status [/api/vpn/]
