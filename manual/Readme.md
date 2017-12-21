@@ -29,14 +29,13 @@ Minimal Odroid C2 shopping list:
 ### Installing from a bootable image
 Download the [latest Odroid C2 image][latest-c2] and write it to an SD card.
 You can use [etcher][] to write the image. Plug the card into an Odroid C2,
-power it up, and wait 2 minutes for the system to boot. If there is a
-[compatible WiFi adapter][wifi-adapters] plugged in, the node will create a
-hotspot named `Liquid-xxxx` (ending with a random word), and the password is
-`investigations`.
+connect your computer to the Odroid using an Ethernet cable,
+power it up, and wait 2 minutes for the system to boot. Don't connect the
+Odroid to an existing Ethernet network (e.g. to a router) as it will interfere
+with the router's network functionality by issuing IP addresses via DHCP.
 
 [latest-c2]: https://jenkins.liquiddemo.org/job/setup-arm64/job/master/lastSuccessfulBuild/artifact/liquid-odroid_c2-arm64-raw.img.xz
 [etcher]: https://etcher.io
-[wifi-adapters]: Hardware.md
 
 ### Installing on existing system
 This advanced mode of installation assumes you have a running Ubuntu Xenial
