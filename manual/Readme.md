@@ -1,72 +1,66 @@
 # Liquid Investigations software distribution
-The Liquid Investigations distribution is a collection of software tools,
-bundled together and preconfigured, to support collaborative investigation
-work. It provides several apps: file upload and sharing, search in uploaded
-files, annotations, chat, and a shared wiki.
+The _Liquid Investigations_ distribution is a collection of software tools
+tailored to support collaborative journalism. It provides several apps: file
+upload and sharing, search, annotations, chat, and wiki.
 
 The distribution runs on a Linux server, called a _node_, which can be a
-regular PC, an ARM board (e.g. Odroid C2), or a cloud server / VPS. The node
-has a user database which is shared across the bundled apps.
+regular PC, an ARM board (e.g. Odroid C2), or a cloud server / VPS. You can
+create a user account for each collaborator and they can connect to your node
+over a local network or the Internet.
 
 
 ## Setting up a Liquid node
 
-### Hardware requirements
-The distribution works on any machine that supports Ubuntu 16.04 "Xenial", with
-a minimum of 2GB of memory and 16GB of storage, and either `x86_64` or `ARM64`
-processor. We provide ready-made system images for the Odroid C2, or
-alternatively, you can run the installer from an existing Ubuntu Xenial system,
-e.g. on a PC server or cloud VPS.
+### Odroid C2
+The liquid distribution runs on the [Odroid C2][] microboard. There are
+up-to-date system images available: [liquid-odroid_c2-arm64-raw.img.xz][].
 
-Minimal Odroid C2 shopping list:
-* Odroid C2 with case and power adapter
-* MicroSD card, minimum 16GB, speed class 10/UHC-1
-* Compatible WiFi adapter (e.g. Asus USB-N14)
+#### Recommended hardware
+* Odroid C2 board
+* Plastic case for Odroid C2
+* Power adapter for Odroid C2
+* MicroSD card, 16GB or more, preferrably UHS-I U3 speed
+* Compatible WiFi adapter (see [list of wifi adapters][])
 * Ethernet CAT5 or CAT6 cable
 * Personal computer with Ethernet port (or USB-to-Ethernet adapter) and
-  supported web browser (Firefox, Chrome, Safari) 
+  supported web browser (Firefox, Chrome, Safari)
 
-### Installing from a bootable image
-Download the [latest Odroid C2 image][latest-c2] and write it to an SD card.
-You can use [etcher][] to write the image. Plug the card into an Odroid C2,
-connect your computer to the Odroid using an Ethernet cable,
-power it up, and wait 2 minutes for the system to boot. Don't connect the
-Odroid to an existing Ethernet network (e.g. to a router) as it will interfere
-with the router's network functionality by issuing IP addresses via DHCP.
 
-[latest-c2]: https://jenkins.liquiddemo.org/job/setup-arm64/job/master/lastSuccessfulBuild/artifact/liquid-odroid_c2-arm64-raw.img.xz
+#### Installation instructions
+1. Download the latest image: [liquid-odroid_c2-arm64-raw.img.xz][].
+2. Burn the image to an SD card using [etcher][] or, if you prefer, `dd`.
+3. Plug the SD card into the Odroid C2 and power it up. Optionally, plug an
+   HDMI display into the Odroid, to see the boot messages.
+4. Wait for 1 minute, then plug in the Ethernet cable into the Odroid and into
+   your computer. Disconnect from any other networks including WiFi. Avoid
+   connecting the Odroid to the network of an existing router as it will
+   interfere with its operations.
+5. Open a web browser and go to http://liquid.example.org. Choose a domain name
+   for your node, and a password for the initial user account. After submitting
+   the form, it should display a success message, with a link to the newly
+   chosen domain name. Don't click on it just yet.
+6. Wait for 2 minues for the system to configure itself, then click on the
+   link. Log in with your newly created account. Enjoy your new liquid node.
+
+[Odroid C2]: http://www.hardkernel.com/main/products/prdt_info.php?g_code=G145457216438
+[liquid-odroid_c2-arm64-raw.img.xz]: https://jenkins.liquiddemo.org/job/setup-arm64/job/master/lastSuccessfulBuild/artifact/liquid-odroid_c2-arm64-raw.img.xz
+[list of wifi adapters]: WiFi-Adapters.md
 [etcher]: https://etcher.io
 
-### Installing on existing system
-This advanced mode of installation assumes you have a running Ubuntu Xenial
-machine. You need shell access, and it should have a working Internet
-connection.
 
-1. Clone the [setup repository](https://github.com/liquidinvestigations/setup):
+### Ubuntu cloud images for x86_64
+The project builds cloud VM images, which are derived from ubuntu cloud images,
+version 16.04, suitable for booting with qemu:
+[liquid-cloud-x86_64-raw.img.gz][]. Take a look at the
+[web-ui-deployment-scripts][] repo, it contains scripts for running the image.
 
-    ```shell
-    sudo git clone https://github.com/liquidinvestigations/setup /opt/setup
-    ```
+[liquid-cloud-x86_64-raw.img.gz]: https://jenkins.liquiddemo.org/job/liquidinvestigations/job/setup/job/master/lastSuccessfulBuild/artifact/liquid-cloud-x86_64-raw.img.gz
+[web-ui-deployment-scripts]: https://github.com/liquidinvestigations/web-ui-deployment-scripts
 
-2. Run the installer:
-
-    ```shell
-    sudo /opt/setup/bin/install
-    ```
-
-### Configuration
-To change the default hotspot name/password, domain name, admin credentials,
-and to configure applications, go to the node's home page. By default this
-is http://fresh.liquid.local. Be sure to connect to the node's hotspot before
-accessing the home page. Log in using the default credentials (username
-`liquid`, password `investigations`) and click on `[admin]`.
-
-From the admin site, you can change the following:
-
-* *Domain name* – this determines the URLs of the liquid node's websites. It
-  should either be a subdomain of your organization (so, if the organization is
-  `example.com`, it can be `colombo.liquid.example.com`) or a private name
-  (e.g. `colombo.liquid.local`).
+## Configuration
+Log in with the initial user account, or another administrator account, and
+click on the "admin" button, in the top right corner of the page. From the
+admin site, you can change the following:
 
 * *WAN* – the node's connection to the Internet. By default, the Ethernet port
   should be plugged into a router, and it will obtain configuration via DHCP
