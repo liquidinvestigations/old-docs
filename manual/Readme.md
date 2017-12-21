@@ -22,6 +22,9 @@ Minimal Odroid C2 shopping list:
 * Odroid C2 with case and power adapter
 * MicroSD card, minimum 16GB, speed class 10/UHC-1
 * Compatible WiFi adapter (e.g. Asus USB-N14)
+* Ethernet CAT5 or CAT6 cable
+* Personal computer with Ethernet port (or USB-to-Ethernet adapter) and
+  supported web browser (Firefox, Chrome, Safari) 
 
 ### Installing from a bootable image
 Download the [latest Odroid C2 image][latest-c2] and write it to an SD card.
