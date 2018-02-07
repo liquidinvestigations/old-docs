@@ -15,6 +15,9 @@ over a local network or the Internet.
 The liquid distribution runs on the [Odroid C2][] microboard. There are
 up-to-date system images available: [liquid-odroid_c2-arm64-raw.img.xz][].
 
+Here is a [set-up guide](https://docs.google.com/document/d/1vPdmYQjvk3zANjnwF9_5n7JQWL0YUCRhEgTx9osHNog/edit?usp=sharing)  for non technical audiences.
+
+
 #### Recommended hardware
 * Odroid C2 board
 * Plastic case for Odroid C2
