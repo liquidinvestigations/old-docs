@@ -28,6 +28,7 @@ Here is a [set-up guide](https://docs.google.com/document/d/1vPdmYQjvk3zANjnwF9_
 * Personal computer with Ethernet port (or USB-to-Ethernet adapter) and
   supported web browser (Firefox, Chrome, Safari)
 
+![ARM inventory](https://i.imgur.com/UABzXa4.png)
 
 #### Installation instructions
 1. Download the latest image: [liquid-odroid_c2-arm64-raw.img.xz][].
