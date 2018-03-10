@@ -4,47 +4,62 @@ tailored to support collaborative journalism. It provides several apps: file
 upload and sharing, search, annotations, chat, and wiki.
 
 The distribution runs on a Linux server, called a _node_, which can be a
-regular PC, an ARM board (e.g. Odroid C2), or a cloud server / VPS. You can
+regular PC, an ARM board (e.g. Odroid C2 / Rock64), or a cloud server / VPS. You can
 create a user account for each collaborator and they can connect to your node
 over a local network or the Internet.
 
 
 ## Setting up a Liquid node
 
-### Odroid C2
-The liquid distribution runs on the [Odroid C2][] microboard. There are
-up-to-date system images available: [liquid-odroid_c2-arm64-raw.img.xz][].
+### Odroid C2 / Rock 64
+The liquid distribution runs on [Odroid C2][] and [Rock 64](https://www.pine64.org/?page_id=7147) microboards.
 
-Here is a [set-up guide](https://docs.google.com/document/d/1vPdmYQjvk3zANjnwF9_5n7JQWL0YUCRhEgTx9osHNog/edit?usp=sharing)  for non technical audiences.
+Latest system images are available here: [Odroid C2](https://jenkins.liquiddemo.org/job/setup-arm64/job/master/lastSuccessfulBuild/artifact/liquid-odroid_c2-arm64-raw.img.gz) and [Rock 64](https://jenkins.liquiddemo.org/job/setup-rock64/job/master/lastStableBuild/artifact/liquid-rock64.img.gz).
 
 
 #### Recommended hardware
-* Odroid C2 board
-* Plastic case for Odroid C2
-* Power adapter for Odroid C2
+* Odroid C2 / Rock 64 boards
+* Plastic case for Odroid C2 /Rock 64
+* Power adapter for Odroid C2 / Rock 64
 * MicroSD card, 16GB or more, preferrably UHS-I U3 speed
-* Compatible WiFi adapter (see [list of wifi adapters][])
+* Compatible WiFi adapter [see shopping list](https://github.com/liquidinvestigations/docs/blob/master/manual/Hardware.md)
 * Ethernet CAT5 or CAT6 cable
 * Personal computer with Ethernet port (or USB-to-Ethernet adapter) and
   supported web browser (Firefox, Chrome, Safari)
 
-![ARM inventory](https://i.imgur.com/UABzXa4.png)
 
 #### Installation instructions
-1. Download the latest image: [liquid-odroid_c2-arm64-raw.img.xz][].
-2. Burn the image to an SD card using [etcher][] or, if you prefer, `dd`.
-3. Plug the SD card into the Odroid C2 and power it up. Optionally, plug an
-   HDMI display into the Odroid, to see the boot messages.
-4. Wait for 1 minute, then plug in the Ethernet cable into the Odroid and into
+1.Make sure you have all the necesary hardware components
+![ARM inventory](https://i.imgur.com/UABzXa4.png)
+
+2.Download the latest images for [Odroid C2](https://jenkins.liquiddemo.org/job/setup-arm64/job/master/lastSuccessfulBuild/artifact/liquid-odroid_c2-arm64-raw.img.gz) and [Rock 64](https://jenkins.liquiddemo.org/job/setup-rock64/job/master/lastStableBuild/artifact/liquid-rock64.img.gz).
+
+3. Take an empty MicroSD card
+
+![Micro SD](https://i.imgur.com/KTiSoju.png)
+
+4. Plug it into your laptop and burn the latest image using [Etcher][] 
+
+![Laprtop](https://i.imgur.com/HfNqTbH.png)
+
+5. Plug the MicroSD card written with the image,  into the Odroid C2 / Rock 64 and power it up.
+
+![MicroSDARM](https://i.imgur.com/wGFpG0c.png)
+
+6. Wait for 1 minute, then plug in the Ethernet cable into the Odroid C2 / Rock 64 and into
    your computer. Disconnect from any other networks including WiFi. Avoid
-   connecting the Odroid to the network of an existing router as it will
+   connecting the Odroid C2/ Rock 64 to the network of an existing router as it will
    interfere with its operations.
-5. Open a web browser and go to http://liquid.example.org. Choose a domain name
+ 
+7. Open a web browser and go to http://liquid.example.org. Choose a domain name
    for your node, and a password for the initial user account. After submitting
    the form, it should display a success message, with a link to the newly
    chosen domain name. Don't click on it just yet.
-6. Wait for 2 minues for the system to configure itself, then click on the
+   
+8. Wait for 2 minues for the system to configure itself, then click on the
    link. Log in with your newly created account. Enjoy your new liquid node.
+   
+   ![Welcome](https://i.imgur.com/ZlxtbWU.png)
 
 [Odroid C2]: http://www.hardkernel.com/main/products/prdt_info.php?g_code=G145457216438
 [liquid-odroid_c2-arm64-raw.img.xz]: https://jenkins.liquiddemo.org/job/setup-arm64/job/master/lastSuccessfulBuild/artifact/liquid-odroid_c2-arm64-raw.img.xz
@@ -118,10 +133,9 @@ Working in a team requires communication and coordination. The Liquid
 distribution comes with a chat app – _Matrix_ – and a wiki – _DokuWiki_. Users
 can share notes and exchange messages in a private and secure environment.
 
-### Chat – matrix.org
+### Chat – Matrix.org | Riot.im
 Go to the homepage and click on _Matrix_. Log in with your credentials on the
-liquid node. Here you can create and join chat rooms, and start private
-conversations.
+liquid node. Here you can use the Riot chat service UI and create and join chat rooms, and start private conversations.
 
 ### Wiki - DokuWiki
 Go to the homepage and click on _DokuWiki_. Log in with your credentials on the
