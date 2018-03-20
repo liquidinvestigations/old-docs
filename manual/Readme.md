@@ -84,7 +84,7 @@ admin site, you can change the following:
 * *WAN* – the node's connection to the Internet. By default, the Ethernet port
   should be plugged into a router, and it will obtain configuration via DHCP
   from the router. You can specify a static configuration if needed. With a 2nd
-  [WiFi adapter][], you can configure the node to connect to an existing WiFi
+  WiFi adapter, you can configure the node to connect to an existing WiFi
   network, instead of plugging in the Ethernet port.
 
 * *LAN* – hotspot configuration. You can set the hotspot's network name and
